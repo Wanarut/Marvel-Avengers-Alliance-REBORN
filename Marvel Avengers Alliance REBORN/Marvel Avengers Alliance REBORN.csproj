@@ -51,6 +51,7 @@
     <Compile Include="Components\StatusBar.cs" />
     <Compile Include="DATA\BackgroundName.cs" />
     <Compile Include="DATA\Gadget.cs" />
+    <Compile Include="DATA\Heroes\Captain_America.cs" />
     <Compile Include="DATA\Heroes\Ant-Man.cs" />
     <Compile Include="MAAGame.cs" />
     <Compile Include="Models\Calculator.cs" />

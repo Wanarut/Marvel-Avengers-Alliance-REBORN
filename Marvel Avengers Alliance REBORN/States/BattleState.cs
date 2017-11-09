@@ -89,12 +89,12 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             #endregion
 
             heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Captain_America(Content));
             heroes.Add(new Ant_Man(Content));
 
+            heroes.Add(new Captain_America(Content));
             heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Captain_America(Content));
 
             for (int i = 0; i < heroes.Count; i++)
             {
@@ -117,8 +117,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 else heroes[i]._small_icon.Position = new Vector2(295 + (i * 30), 6);
 
                 heroes[i].Load_Sprite(Content, heroes[i].Get_Name(), heroes[i].Get_Uniform());
-                if(i % 2 == 0) heroes[i].Set_Sprite_Position(new Vector2(0, (i * 50) - 100));
-                else heroes[i].Set_Sprite_Position(new Vector2(SCREEN_WIDTH - heroes[i].Get_Sprite_Width(), ((i - 1) * 50) - 100));
+                if(i % 2 == 0) heroes[i].Set_Sprite_Position(new Vector2(0, (i * 50) - heroes[i].Get_Sprite_Height() + 330));
+                else heroes[i].Set_Sprite_Position(new Vector2(SCREEN_WIDTH - heroes[i].Get_Sprite_Width(), ((i - 1) * 50) - heroes[i].Get_Sprite_Height() + 330));
                 heroes[i].Get_Sprite().Click += Char_was_Clicked;
             }
             
@@ -224,7 +224,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 avatar._sp_bar.Update(gameTime);
             }
 
-            //heroes[cur_turn]._small_icon.Update(gameTime);
+            heroes[cur_turn]._small_icon.Position = new Vector2(277, 0);
+
             int j = 1;
             for(int i = cur_turn + 1; i != cur_turn; i++)
             {
@@ -233,8 +234,6 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 j++;
                 if (j == heroes.Count) break;
             }
-
-            heroes[cur_turn]._small_icon.Position = new Vector2(277, 0);
 
             foreach (var btnskill in heroes[cur_turn].Get_Skills_Button())
                 btnskill.Update(heroes[cur_turn]);

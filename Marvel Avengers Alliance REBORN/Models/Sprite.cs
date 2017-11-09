@@ -50,7 +50,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         #region Action var
         protected Texture2D _main_texture;
         protected Texture2D _was_hit_texture;
-        protected List<Texture2D> _skill_texture;
+        //protected List<Texture2D> _skill_texture;
         protected bool isDead;
         protected bool hasTarget;
         protected bool wasAttacked;
@@ -74,23 +74,18 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         public Sprite(ContentManager content, string hero_name, string uniform_name)
         {
             _targets = new List<Sprite>();
-            _skill_texture = new List<Texture2D>();
+            //_skill_texture = new List<Texture2D>();
 
             _timePerFrame = (float)1 / _frame_per_sec;
 
-            ChangeTexture(content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/" + ("Sprite_" + uniform_name + "_Main")), 15, 4);
+            ChangeTexture(content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/" + "Sprite_Main"), 15, 4);
 
             _main_texture = _cur_texture;
 
             _frame_width = _cur_texture.Width / 15;
             _frame_height = _cur_texture.Height / 4;
 
-            _was_hit_texture = content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/" + (uniform_name + "_was_Hit"));
-
-            /*for (int i = 1; i <= 4; i++)
-            {
-                _skill_texture.Add(content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/Sprite_" + "Ant-Man-Break_In"));
-            }*/
+            _was_hit_texture = content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/" + "Sprite_was_Hit");
         }
 
         public void ChangeTexture(Texture2D texture, int frame_per_sec, int time_cast)
@@ -237,7 +232,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
         public void UpdateFrame(float elapsed)
         {
-            _Depth = ((_cur_position.Y * (-1)) / 400) + 0.5f;
+            _Depth = (((_cur_position.Y + Get_Sprite_Height() - 330) * (-1)) / 400) + 1.0f;
             //if(_cur_frame % 60 == 29) Console.Out.WriteLine(Position.Y + "has Dept = " + _Depth);
 
             #region Mouse Cast

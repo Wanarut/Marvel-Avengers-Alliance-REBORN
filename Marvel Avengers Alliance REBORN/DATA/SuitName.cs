@@ -9,15 +9,15 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
     class Suit
     {
         #region Suit Name
-        public const string Ant_Man_Modern = "Ant-Man-Modern";
+        public const string Ant_Man_Modern = "Modern";
 
-        public const string Cable_Classic = "Cable-Classic";
-        public const string Cable_Classic_2 = "Cable-Classic_2";
+        public const string Cable_Classic = "Classic";
+        public const string Cable_Classic_2 = "Classic_2";
 
-        public const string Captain_America_Avengers = "Captain_America-Avengers";
-        public const string Captain_America_Avengers_Age_of_Ultron = "Captain_America-Avengers_Age_of_Ultron";
-        public const string Captain_America_Classic = "Captain_America-Classic";
-        public const string Captain_America_WWII = "Captain_America-WWII";
+        public const string Captain_America_Avengers = "Avengers";
+        public const string Captain_America_Avengers_Age_of_Ultron = "Avengers_Age_of_Ultron";
+        public const string Captain_America_Classic = "Classic";
+        public const string Captain_America_WWII = "WWII";
 
         public const string Cyclops_Modern = "Cyclops-Modern";
         public const string Cyclops_Phoenix_Five = "Cyclops-Phoenix_Five";
