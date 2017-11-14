@@ -61,13 +61,16 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected Character _mychar;
         #endregion
 
-        public Rectangle Rectangle
+        protected Rectangle Rectangle;
+
+        /*public Rectangle Rectangle
         {
             get
             {
-                return new Rectangle((int)_cur_position.X + (_frame_width / 2) - 65, (int)_cur_position.Y + ((_frame_height / 3)) + 80, _frame_width / 2, (_frame_height / 4) - 5);
+                return new Rectangle((int)_cur_position.X, (int)_cur_position.Y - _frame_height, _frame_width, _frame_height / 2);
+                //return new Rectangle((int)_cur_position.X + (_frame_width / 2) - 65, (int)_cur_position.Y + ((_frame_height / 3)) + 80, _frame_width / 2, (_frame_height / 4) - 5);
             }
-        }
+        }*/
 
         public Vector2 Position { get; set; }
         
@@ -106,6 +109,11 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         public void Set_MyChar(Character mychar)
         {
             _mychar = mychar;
+        }
+
+        public void Set_Rectangle(Rectangle rectangle)
+        {
+            Rectangle = rectangle;
         }
 
         public void Set_HasTarget(bool logic)
@@ -232,7 +240,8 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
         public void UpdateFrame(float elapsed)
         {
-            _Depth = (((_cur_position.Y + Get_Sprite_Height() - 330) * (-1)) / 400) + 1.0f;
+            _Depth = (((_cur_position.Y - 330) * (-1)) / 400) + 0.6f;
+            //_Depth = (((_cur_position.Y + Get_Sprite_Height() - 330) * (-1)) / 400) + 1.0f;
             //if(_cur_frame % 60 == 29) Console.Out.WriteLine(Position.Y + "has Dept = " + _Depth);
 
             #region Mouse Cast
@@ -295,7 +304,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                         engine.HeathCalculate(this, _targets);
                         foreach (var target in _targets)
                         {
-                            target.ChangeTexture(_was_hit_texture, 1, 1);
+                            target.ChangeTexture(target._was_hit_texture, 1, 1);
                         }
                     }
                     
@@ -308,7 +317,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                     ChangeTexture(_main_texture, 15, 4);
                     foreach (var target in _targets)
                     {
-                        target.ChangeTexture(_main_texture, 15, 4);
+                        target.ChangeTexture(target._main_texture, 15, 4);
                     }
                     hasTarget = false;
                     _targets = new List<Sprite>();
@@ -323,7 +332,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
        
         public void DrawFrame(SpriteBatch spriteBatch)
         {
-            if (Position.X < MAAGame.SCREEN_WIDTH / 2) DrawFrame(spriteBatch, _cur_column, _cur_row);
+            if (Position.X < MAAGame.SCREEN_WIDTH / 3.5f) DrawFrame(spriteBatch, _cur_column, _cur_row);
             else DrawFrameFlip(spriteBatch);
         }
 
@@ -337,7 +346,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             _frame_width = _cur_texture.Width / _frame_per_sec;
             _frame_height = _cur_texture.Height / _time_cast;
             Rectangle source_rect = new Rectangle(_frame_width * _cur_column, _frame_height * _cur_row, _frame_width, _frame_height);
-            spriteBatch.Draw(_cur_texture, _cur_position, source_rect, color, _Rotation, _rotate_point, _Scale, effect, _Depth);
+            spriteBatch.Draw(_cur_texture, new Vector2(_cur_position.X, _cur_position.Y - _frame_height), source_rect, color, _Rotation, _rotate_point, _Scale, effect, _Depth);
         }
 
         public void DrawFrameFlip(SpriteBatch spriteBatch)

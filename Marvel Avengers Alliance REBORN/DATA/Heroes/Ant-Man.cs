@@ -91,39 +91,21 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         #region Animation Editor
         public override void Check_Skill()
         {
+             //_sprite.Set_Rectangle(new Rectangle((int)_sprite._cur_position.X, (int)_sprite._cur_position.Y - _sprite.Get_Sprite_Width(), _sprite.Get_Sprite_Width(), _sprite.Get_Sprite_Height() / 2));
+
             switch (_cur_skill.Get_Name())
             {
                 case "Ant-Man-Break_In":
                     #region Skill Motion
                     {
-                        Vector2 goal;
-                        if (_sprite.Get_Targets()[0].Position.X > MAAGame.SCREEN_WIDTH / 2) goal = new Vector2(_sprite.Get_Targets()[0].Position.X - _sprite.Get_Targets()[0].Get_Sprite_Width(), _sprite.Get_Targets()[0].Position.Y + 0.01f);
-                        else goal = new Vector2(_sprite.Get_Targets()[0].Position.X + _sprite.Get_Targets()[0].Get_Sprite_Width(), _sprite.Get_Targets()[0].Position.Y + 0.01f);
-                        _sprite.Transition(_sprite.Position, goal, 11, 5);
 
-                        _sprite.Transition(goal, _sprite.Position, 35, 5);
-
-                        if (_sprite.Get_Cur_Frame() == 17) _sprite.Set_isHealth_Calculated(true);
-                        else _sprite.Set_isHealth_Calculated(false);
-                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
-                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
                 case "Ant-Man-Greatest_Allies":
                     #region Skill Motion
                     {
-                        Vector2 goal;
-                        if (_sprite.Get_Targets()[0].Position.X > MAAGame.SCREEN_WIDTH / 2) goal = new Vector2(_sprite.Get_Targets()[0].Position.X - _sprite.Get_Targets()[0].Get_Sprite_Width(), _sprite.Get_Targets()[0].Position.Y + 0.01f);
-                        else goal = new Vector2(_sprite.Get_Targets()[0].Position.X + _sprite.Get_Targets()[0].Get_Sprite_Width(), _sprite.Get_Targets()[0].Position.Y + 0.01f);
-                        _sprite.Transition(_sprite.Position, goal, 11, 5);
-
-                        _sprite.Transition(goal, _sprite.Position, 35, 5);
-
-                        if (_sprite.Get_Cur_Frame() == 17) _sprite.Set_isHealth_Calculated(true);
-                        else _sprite.Set_isHealth_Calculated(false);
-                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
-                        else _sprite.Set_isStamina_Calculated(false);
+                        
                         break;
                     }
                     #endregion
@@ -131,8 +113,8 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                     #region Skill Motion
                     {
                         Vector2 goal;
-                        if (_sprite.Get_Targets()[0].Position.X > MAAGame.SCREEN_WIDTH / 2) goal = new Vector2(_sprite.Get_Targets()[0].Position.X - _sprite.Get_Targets()[0].Get_Sprite_Width(), _sprite.Get_Targets()[0].Position.Y + 0.01f);
-                        else goal = new Vector2(_sprite.Get_Targets()[0].Position.X + _sprite.Get_Targets()[0].Get_Sprite_Width(), _sprite.Get_Targets()[0].Position.Y + 0.01f);
+                        if (_sprite.Get_Targets()[0].Position.X > MAAGame.SCREEN_WIDTH / 2) goal = new Vector2(_sprite.Get_Targets()[0].Position.X - (_sprite.Get_Targets()[0].Get_Sprite_Width() / 1.2f), _sprite.Get_Targets()[0].Position.Y + 0.01f);
+                        else goal = new Vector2(_sprite.Get_Targets()[0].Position.X + (_sprite.Get_Targets()[0].Get_Sprite_Width() / 1.2f), _sprite.Get_Targets()[0].Position.Y + 0.01f);
                         _sprite.Transition(_sprite.Position, goal, 11, 5);
 
                         _sprite.Transition(goal, _sprite.Position, 35, 5);
@@ -147,17 +129,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                 case "Ant-Man-Swarm_Cloud":
                     #region Skill Motion
                     {
-                        Vector2 goal;
-                        if (_sprite.Get_Targets()[0].Position.X > MAAGame.SCREEN_WIDTH / 2) goal = new Vector2(_sprite.Get_Targets()[0].Position.X - _sprite.Get_Targets()[0].Get_Sprite_Width(), _sprite.Get_Targets()[0].Position.Y + 0.01f);
-                        else goal = new Vector2(_sprite.Get_Targets()[0].Position.X + _sprite.Get_Targets()[0].Get_Sprite_Width(), _sprite.Get_Targets()[0].Position.Y + 0.01f);
-                        _sprite.Transition(_sprite.Position, goal, 11, 5);
-
-                        _sprite.Transition(goal, _sprite.Position, 35, 5);
-
-                        if (_sprite.Get_Cur_Frame() == 17) _sprite.Set_isHealth_Calculated(true);
-                        else _sprite.Set_isHealth_Calculated(false);
-                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
-                        else _sprite.Set_isStamina_Calculated(false);
+                        
                         break;
                     }
                     #endregion

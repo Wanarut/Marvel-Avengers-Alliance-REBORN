@@ -51,8 +51,12 @@
     <Compile Include="Components\StatusBar.cs" />
     <Compile Include="DATA\BackgroundName.cs" />
     <Compile Include="DATA\Gadget.cs" />
-    <Compile Include="DATA\Heroes\Captain_America.cs" />
+    <Compile Include="DATA\Heroes\Deadpool.cs" />
+    <Compile Include="DATA\Heroes\Hulk.cs" />
+    <Compile Include="DATA\Heroes\X-23.cs" />
+    <Compile Include="DATA\Heroes\Captain America.cs" />
     <Compile Include="DATA\Heroes\Ant-Man.cs" />
+    <Compile Include="DATA\Songs.cs" />
     <Compile Include="MAAGame.cs" />
     <Compile Include="Models\Calculator.cs" />
     <Compile Include="Models\Character.cs" />
@@ -65,7 +69,6 @@
     <Compile Include="DATA\_Class.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sprites\Sprite Ant-Man.cs" />
     <Compile Include="States\BattleState.cs" />
   </ItemGroup>
   <ItemGroup>

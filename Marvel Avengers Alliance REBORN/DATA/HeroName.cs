@@ -17,6 +17,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         public const string Dr_Strange = "Dr. Strange";
         public const string Ghost_Rider = "Ghost Rider";
         public const string Hulk = "Hulk";
+        public const string X_23 = "X-23";
         #endregion
     }
 }

@@ -151,6 +151,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         public void Set_Sprite_Position(Vector2 vector)
         {
             _sprite.Position = vector;
+            _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Height() / 3), (int)_sprite.Position.Y + _sprite.Get_Sprite_Height() - 390, _sprite.Get_Sprite_Width() / 2, (int)(_sprite.Get_Sprite_Height() / 2)));
         }
 
         public void Set_Sprite_Focus(bool logic)

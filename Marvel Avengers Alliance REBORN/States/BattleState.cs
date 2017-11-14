@@ -5,6 +5,7 @@ using Marvel_Avengers_Alliance_REBORN.DATA.Heroes;
 using Marvel_Avengers_Alliance_REBORN.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         private Background turn_bar;
         private Background skill_bar;
         private int cur_turn;
+        private Song song;
         protected Viewport viewport;
         #endregion
 
@@ -62,6 +64,10 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             viewport = graphics.GraphicsDevice.Viewport;
 
+            song = Content.Load<Song>("Songs/" + Songs.Vaders_Redemption_Major_Key);    //Set Song
+            MediaPlayer.Volume -= 0.7f;
+            MediaPlayer.Play(song);
+
             combat_background.LoadContent(Content, "Combat_Background/" + BG.BG_011);  //Set BackGround
 
             empty_status_bar.LoadContent(Content, "Component/" + Gadget.Empty_Status_Bar);
@@ -88,17 +94,32 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             btn.Click += Menu_was_Clicked;
             #endregion
 
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Captain_America(Content));
+            //heroes.Add(new Ant_Man(Content));
+            /*heroes.Add(new Captain_America(Content));
             heroes.Add(new Ant_Man(Content));
 
             heroes.Add(new Captain_America(Content));
             heroes.Add(new Ant_Man(Content));
             heroes.Add(new Captain_America(Content));
+            heroes.Add(new Ant_Man(Content));*/
+
+            heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Captain_America(Content));
+            heroes.Add(new X_23(Content));
+            heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Captain_America(Content));
+            heroes.Add(new X_23(Content));
+
+            /*heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Ant_Man(Content));*/
 
             for (int i = 0; i < heroes.Count; i++)
             {
-                for(int j = 0; j < 4; j++)
+                for(int j = 0; j < heroes[i].Get_Skills().Count; j++)
                 {
                     var btnskill = new SkillButton(Content, heroes[i].Get_Name(), heroes[i].Get_Uniform(), heroes[i].Get_Skills()[j]);
                     btnskill.Position = new Vector2(((combat_background.Get_Width() - btnskill.Get_Width()) / 2) + ((j - 4) * (btnskill.Get_Width() + 8)) + (btnskill.Get_Width() / 2), 496);
@@ -117,8 +138,10 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 else heroes[i]._small_icon.Position = new Vector2(295 + (i * 30), 6);
 
                 heroes[i].Load_Sprite(Content, heroes[i].Get_Name(), heroes[i].Get_Uniform());
-                if(i % 2 == 0) heroes[i].Set_Sprite_Position(new Vector2(0, (i * 50) - heroes[i].Get_Sprite_Height() + 330));
-                else heroes[i].Set_Sprite_Position(new Vector2(SCREEN_WIDTH - heroes[i].Get_Sprite_Width(), ((i - 1) * 50) - heroes[i].Get_Sprite_Height() + 330));
+                if (i % 2 == 0) heroes[i].Set_Sprite_Position(new Vector2(0, (i * 50) + 330));
+                else heroes[i].Set_Sprite_Position(new Vector2(SCREEN_WIDTH - heroes[i].Get_Sprite_Width(), ((i - 1) * 50) + 330));
+                //if(i % 2 == 0) heroes[i].Set_Sprite_Position(new Vector2(0, (i * 50) - heroes[i].Get_Sprite_Height() + 330));
+                //else heroes[i].Set_Sprite_Position(new Vector2(SCREEN_WIDTH - heroes[i].Get_Sprite_Width(), ((i - 1) * 50) - heroes[i].Get_Sprite_Height() + 330));
                 heroes[i].Get_Sprite().Click += Char_was_Clicked;
             }
             
@@ -127,16 +150,30 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             base.LoadContent();
         }
 
+        private void Change_Turn(int num_player = BattleState.ONE_PLAYER)
+        {
+            heroes[cur_turn].Set_Sprite_Focus(false);
+            if(num_player == 1)
+            {
+                cur_turn += 2;
+            }
+            else
+            {
+                cur_turn++;
+            }
+            cur_turn = cur_turn % heroes.Count;
+            heroes[cur_turn].Set_Sprite_Focus(true);
+
+            heroes[cur_turn]._small_icon.Position = new Vector2(277, 0);
+        }
+
         private void Menu_was_Clicked(object sender, EventArgs e)
         {
             switch (((MenuButton)sender).Get_Name())
             {
                 case Gadget.Agent_Recharge:
                     {
-                        heroes[cur_turn].Set_Sprite_Focus(false);
-                        if (cur_turn >= heroes.Count - 1) cur_turn = 0;
-                        else cur_turn++;
-                        heroes[cur_turn].Set_Sprite_Focus(true);
+                        Change_Turn(BattleState.TWO_PLAYER);
                         break;
                     }
                 case Gadget.Arc_Reactor_Charge:
@@ -192,6 +229,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             heroes[cur_turn].Skill_Action(Content);
 
             heroes[cur_turn].isPickSkill = false;
+
+            Change_Turn();
         }
 
         protected override void UnloadContent()
@@ -224,16 +263,16 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 avatar._sp_bar.Update(gameTime);
             }
 
-            heroes[cur_turn]._small_icon.Position = new Vector2(277, 0);
-
             int j = 1;
             for(int i = cur_turn + 1; i != cur_turn; i++)
             {
-                if (i >= heroes.Count) i = 0;
+                i = i % heroes.Count;
                 heroes[i]._small_icon.Position = new Vector2(295 + (j * 30), 6);
                 j++;
                 if (j == heroes.Count) break;
             }
+
+            //heroes[cur_turn]._small_icon.Position = new Vector2(277, 0);
 
             foreach (var btnskill in heroes[cur_turn].Get_Skills_Button())
                 btnskill.Update(heroes[cur_turn]);
