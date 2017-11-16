@@ -4,6 +4,7 @@ using Marvel_Avengers_Alliance_REBORN.DATA;
 using Marvel_Avengers_Alliance_REBORN.DATA.Heroes;
 using Marvel_Avengers_Alliance_REBORN.Models;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using System;
@@ -28,22 +29,20 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         private Background turn_bar;
         private Background skill_bar;
         private int cur_turn;
-        private Song song;
         protected Viewport viewport;
         #endregion
 
         public BattleState(/*List<Character> avatar*/)
         {
             heroes = new List<Character>();
-            graphics = new GraphicsDeviceManager(this);
 
+            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
-
             MediaPlayer.IsRepeating = true;
 
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
+            
             /*heroes.Add(new Ant_Man(Content));
             heroes.Add(new Ant_Man(Content));
             heroes.Add(new Deadpool(Content));
@@ -66,15 +65,23 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             heroes.Add(new X_23(Content));*/
         }
 
-        public void Set_Heroes(List<Character> avatars)
+        public BattleState(MAAGame game, GraphicsDeviceManager graphicsDevice, ContentManager content, List<Character> avatar)
         {
-            heroes = avatars;
+            _game = game;
+            graphics = graphicsDevice;
+            Content = content;
+            heroes = avatar;
+
+            //graphics = new GraphicsDeviceManager(this);
+            //Content.RootDirectory = "Content";
+            IsMouseVisible = true;
+            MediaPlayer.IsRepeating = true;
+
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
         }
 
         protected override void Initialize()
         {
-            Set_Windows_size(SCREEN_WIDTH, SCREEN_HEIGHT);
-
             combat_background = new Background();
             empty_status_bar = new Background();
             turn_bar = new Background();
@@ -83,6 +90,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             cur_turn = 0;
 
+            LoadContent();
             base.Initialize();
         }
 
@@ -91,9 +99,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             viewport = graphics.GraphicsDevice.Viewport;
-
             song = Content.Load<Song>("Songs/" + Songs.Thor_Ragnarok_Soundtrack_Song);    //Set Song
-            MediaPlayer.Volume -= 0.7f;
+            //MediaPlayer.Volume -= 0.2f;
             MediaPlayer.Play(song);
 
             combat_background.LoadContent(Content, "Combat_Background/" + BG.BG_011);  //Set BackGround
@@ -175,7 +182,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             heroes[cur_turn].Set_Sprite_Focus(true);
 
-            base.LoadContent();
+            //base.LoadContent();
         }
 
         private void Change_Turn(int num_player = BattleState.ONE_PLAYER)
@@ -308,7 +315,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             foreach (var btn in menu_component)
                 btn.Update(gameTime);
 
-            base.Update(gameTime);
+            //base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -348,14 +355,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             spriteBatch.End();
 
-            base.Draw(gameTime);
-        }
-
-        protected void Set_Windows_size(int width, int height)
-        {
-            graphics.PreferredBackBufferWidth = width;  // set this value to the desired width of your window
-            graphics.PreferredBackBufferHeight = height;   // set this value to the desired height of your window
-            graphics.ApplyChanges();
+            //base.Draw(gameTime);
         }
     }
 }

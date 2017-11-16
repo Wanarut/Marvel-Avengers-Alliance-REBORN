@@ -18,7 +18,6 @@ namespace MarvMarvel_Avengers_Alliance_REBORN.Models
         protected Texture2D textboxTexture;
         protected Texture2D cursor;
         protected SpriteFont Calibri;
-        protected SpriteBatch spriteBatch;
         protected string text;
         protected Keys[] keysToCheck = new Keys[] { Keys.A, Keys.B, Keys.C, Keys.D, Keys.E, Keys.F, Keys.G, Keys.H, Keys.I,
             Keys.J, Keys.K, Keys.L, Keys.M, Keys.N, Keys.O, Keys.P, Keys.Q, Keys.R, Keys.S, Keys.T, Keys.U, Keys.V,
@@ -36,9 +35,9 @@ namespace MarvMarvel_Avengers_Alliance_REBORN.Models
             Calibri = content.Load<SpriteFont>("Fonts/BigConso");
             textboxTexture = content.Load<Texture2D>("Component/textbox");
             cursor = content.Load<Texture2D>("Component/text_cursor");
-            textboxPosition = new Vector2((MAAGame.SCREEN_WIDTH / 2) - (textboxTexture.Width / 2), 20);
+            textboxPosition = new Vector2((MAAGame.SCREEN_WIDTH / 2) - (textboxTexture.Width / 2), 100);
             cursorPosition = new Vector2(textboxPosition.X + 50, textboxPosition.Y + 49);
-            textPosition = new Vector2(textboxPosition.X + 50, textboxPosition.Y + 45);
+            textPosition = new Vector2(textboxPosition.X + 60, textboxPosition.Y + 45);
             blink = false;
             text = "";
         }

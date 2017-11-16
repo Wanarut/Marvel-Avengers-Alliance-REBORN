@@ -3,6 +3,7 @@ using Marvel_Avengers_Alliance_REBORN.Components;
 using Marvel_Avengers_Alliance_REBORN.DATA;
 using Marvel_Avengers_Alliance_REBORN.DATA.Heroes;
 using Marvel_Avengers_Alliance_REBORN.Models;
+using MarvMarvel_Avengers_Alliance_REBORN.Models;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,19 +17,57 @@ using System.Threading.Tasks;
 
 namespace Marvel_Avengers_Alliance_REBORN.States
 {
-    class LogInState : State
+    class LogInState : MAAGame
     {
         private List<Component> _menucomponent;
         private Background _background;
+        private Textbox textbox;
 
-        public LogInState(MAAGame game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
+        public LogInState()
         {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+            IsMouseVisible = true;
+            MediaPlayer.IsRepeating = true;
+        }
+
+        public LogInState(MAAGame game, GraphicsDeviceManager graphicsDevice, ContentManager content)
+        {
+            _game = game;
+            graphics = graphicsDevice;
+            Content = content;
+
+            //graphics = new GraphicsDeviceManager(this);
+            //Content.RootDirectory = "Content";
+            IsMouseVisible = true;
+            MediaPlayer.IsRepeating = true;
+
+            TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
+        }
+
+        protected override void Initialize()
+        {
+            Set_Windows_size(SCREEN_WIDTH, SCREEN_HEIGHT);
+
             _menucomponent = new List<Component>();
             _background = new Background();
-            _background.LoadContent(game.Content, "Combat_Background/" + BG.BG_024);  //Set BackGround
 
-            var btn = new MenuButton(content, Gadget.Agent_Recharge);
-            btn.Position = new Vector2(0, 0);
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            _background.LoadContent(Content, "Combat_Background/" + BG.BG_024);  //Set BackGround
+
+            textbox = new Textbox(Content, "textbox1");
+            song = Content.Load<Song>("Songs/" + Songs.Imagine_Dragons_Warriors);    //Set Song
+            MediaPlayer.Volume -= 0.2f;
+            MediaPlayer.Play(song);
+
+            var btn = new MenuButton(Content, Gadget.Agent_Recharge);
+            btn.Position = new Vector2(674, 230);
             _menucomponent.Add(btn);
             btn.Click += Menu_was_Clicked;
         }
@@ -40,7 +79,15 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             {
                 case Gadget.Agent_Recharge:
                     {
-                        
+                        MediaPlayer.Stop();
+                        List<Character> heroes = new List<Character>();
+                        heroes.Add(new Ant_Man(Content));
+                        heroes.Add(new Ant_Man(Content));
+                        heroes.Add(new Captain_America(Content));
+                        heroes.Add(new Captain_America(Content));
+                        heroes.Add(new Cable(Content));
+                        heroes.Add(new Cable(Content));
+                        _game.Change_State(new BattleState(this, graphics, Content, heroes));
                         break;
                     }
                 case Gadget.Arc_Reactor_Charge:
@@ -58,28 +105,30 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             }
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            //spriteBatch.Begin();
-
-            _background.Draw(spriteBatch);
-
-            foreach (var btn in _menucomponent)
-                btn.Draw(spriteBatch);
-
-            //spriteBatch.End();
-        }
-
-        public override void PostUpdate(GameTime gameTime)
+        protected void PostUpdate(GameTime gameTime)
         {
             
         }
 
-        public override void Update(GameTime gameTime)
+        protected override void Update(GameTime gameTime)
         {
-
             foreach (var btn in _menucomponent)
                 btn.Update(gameTime);
+
+            textbox.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            spriteBatch.Begin();
+
+            _background.Draw(spriteBatch);
+            textbox.Draw(gameTime, spriteBatch);
+
+            foreach (var btn in _menucomponent)
+                btn.Draw(spriteBatch);
+
+            spriteBatch.End();
         }
     }
 }
