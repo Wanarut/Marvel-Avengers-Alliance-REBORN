@@ -30,11 +30,11 @@ namespace Marvel_Avengers_Alliance_REBORN.Components
             _texture = content.Load<Texture2D>(asset);
         }
 
-        public void Draw(SpriteBatch spriteBatch,float scale)
+        public void Draw(SpriteBatch spriteBatch,float scale, SpriteEffects effect = SpriteEffects.None)
         {
             var color = Color.White;
             //spriteBatch.Draw(_texture, Rectangle, color);
-            spriteBatch.Draw(_texture,Position,Rectangle,color,0,Vector2.Zero, scale, SpriteEffects.None,0);
+            spriteBatch.Draw(_texture,Position,Rectangle,color,0,Vector2.Zero, scale, effect, 0);
         }
 
         public override void Update(GameTime gameTime)

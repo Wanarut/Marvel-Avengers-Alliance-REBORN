@@ -130,17 +130,17 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             {
                 _sprite.Position = new Vector2(vector.X - 80, vector.Y);
                 _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 3.4f),
-                                                    (int)_sprite.Position.Y - (int)(_sprite.Get_Sprite_Height() / 1.35f),
+                                                    (int)_sprite.Position.Y - 180,
                                                     (int)(_sprite.Get_Sprite_Width() / 5.2f),
-                                                    (int)(_sprite.Get_Sprite_Height() / 2.6f) + 2));
+                                                    100));
             }
             else
             {
                 _sprite.Position = new Vector2(vector.X + 80, vector.Y);
                 _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 3.4f) + (int)(_sprite.Get_Sprite_Width() / 4.5f),
-                                                    (int)_sprite.Position.Y - (int)(_sprite.Get_Sprite_Height() / 1.35f),
+                                                    (int)_sprite.Position.Y - 180,
                                                     (int)(_sprite.Get_Sprite_Width() / 5.2f),
-                                                    (int)(_sprite.Get_Sprite_Height() / 2.6f) + 2));
+                                                    100));
 
             }
         }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Marvel_Avengers_Alliance_REBORN.Models
 {
-    public abstract class State : Game
+    public abstract class State
     {
         protected ContentManager _content;
 

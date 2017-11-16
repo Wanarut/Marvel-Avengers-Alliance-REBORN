@@ -43,12 +43,27 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
 
             MediaPlayer.IsRepeating = true;
-            heroes.Add(new Deadpool(Content));
-            heroes.Add(new Deadpool(Content));
+
+            /*heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Ant_Man(Content));
             heroes.Add(new Deadpool(Content));
             heroes.Add(new Deadpool(Content));
             heroes.Add(new Cable(Content));
-            heroes.Add(new Cable(Content));            
+            heroes.Add(new Cable(Content));*/
+
+            heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Captain_America(Content));
+            heroes.Add(new Captain_America(Content));
+            heroes.Add(new Cable(Content));
+            heroes.Add(new Cable(Content));
+
+            /*heroes.Add(new Ant_Man(Content));
+            heroes.Add(new Captain_America(Content));
+            heroes.Add(new Cable(Content));
+            heroes.Add(new Deadpool(Content));
+            heroes.Add(new Hulk(Content));
+            heroes.Add(new X_23(Content));*/
         }
 
         public void Set_Heroes(List<Character> avatars)
@@ -320,8 +335,10 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 heroes[i].Draw_Sprite(gameTime, spriteBatch);
                 heroes[i]._hp_bar.Draw(spriteBatch);
                 heroes[i]._sp_bar.Draw(spriteBatch);
-                if(i == cur_turn) heroes[i]._small_icon.Draw(spriteBatch, 1);
-                else heroes[i]._small_icon.Draw(spriteBatch, 0.66f);
+                SpriteEffects effect = SpriteEffects.None;
+                if(heroes[i].Get_Sprite().Position.X > MAAGame.SCREEN_WIDTH / 4.0f) effect = SpriteEffects.FlipHorizontally;
+                if (i == cur_turn) heroes[i]._small_icon.Draw(spriteBatch, 1, effect);
+                else heroes[i]._small_icon.Draw(spriteBatch, 0.66f, effect);
             }
 
             foreach (var btnskill in heroes[cur_turn].Get_Skills_Button())

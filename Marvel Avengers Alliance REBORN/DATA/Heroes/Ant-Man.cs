@@ -144,16 +144,16 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             if (_sprite.Position.X < MAAGame.SCREEN_WIDTH / 4.0f)
             {
                 _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 2.5f),
-                                                    (int)_sprite.Position.Y - (int)(_sprite.Get_Sprite_Height() / 2) + 15,
-                                                    (int)(_sprite.Get_Sprite_Width() / 1.8f),
-                                                    (int)(_sprite.Get_Sprite_Height() / 4) - 5));
+                                                    (int)_sprite.Position.Y - 180,
+                                                    (int)(_sprite.Get_Sprite_Width() / 1.8f), 
+                                                    100));
             }
             else
             {
                 _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X - (int)(_sprite.Get_Sprite_Width() / 2.5f) + (int)(_sprite.Get_Sprite_Width() / 2.3f),
-                                                    (int)_sprite.Position.Y - (int)(_sprite.Get_Sprite_Height() / 2) + 15,
-                                                    (int)(_sprite.Get_Sprite_Width() / 1.8f),
-                                                    (int)(_sprite.Get_Sprite_Height() / 4) - 5));
+                                                    (int)_sprite.Position.Y - 180,
+                                                    (int)(_sprite.Get_Sprite_Width() / 1.8f), 
+                                                    100));
             }
         }
     }

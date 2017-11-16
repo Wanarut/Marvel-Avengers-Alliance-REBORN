@@ -127,7 +127,20 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         public override void Set_Sprite_Position(Vector2 vector)
         {
             _sprite.Position = vector;
-            _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Height() / 3), (int)_sprite.Position.Y + _sprite.Get_Sprite_Height() - 390, _sprite.Get_Sprite_Width() / 2, (int)(_sprite.Get_Sprite_Height() / 2)));
+            if (_sprite.Position.X < MAAGame.SCREEN_WIDTH / 4.0f)
+            {
+                _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 4.0f),
+                                                    (int)_sprite.Position.Y - 180,
+                                                    (int)(_sprite.Get_Sprite_Width() / 3.0f),
+                                                    100));
+            }
+            else
+            {
+                _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 4.0f) + (int)(_sprite.Get_Sprite_Width() / 6.3f),
+                                                    (int)_sprite.Position.Y - 180,
+                                                    (int)(_sprite.Get_Sprite_Width() / 3.0f),
+                                                    100));
+            }
         }
     }
 }

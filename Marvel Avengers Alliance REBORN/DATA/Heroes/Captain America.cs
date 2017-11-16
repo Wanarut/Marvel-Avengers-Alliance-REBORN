@@ -128,9 +128,9 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         {
             _sprite.Position = vector;
             _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 4), 
-                                                (int)_sprite.Position.Y + _sprite.Get_Sprite_Height() - 390,
+                                                (int)_sprite.Position.Y -180,
                                                 (int)_sprite.Get_Sprite_Width() / 2, 
-                                                (int)(_sprite.Get_Sprite_Height() / 2)));
+                                                100));
         }
     }
 }
