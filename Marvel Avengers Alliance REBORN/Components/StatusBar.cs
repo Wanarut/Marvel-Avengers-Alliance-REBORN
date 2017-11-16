@@ -60,7 +60,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Components
         public override void LoadContent(ContentManager content, string asset)
         {
             _texture = content.Load<Texture2D>(asset);
-            Calibri = Conso = content.Load<SpriteFont>("Fonts/Calibri");
+            Calibri = content.Load<SpriteFont>("Fonts/Calibri");
             Conso = content.Load<SpriteFont>("Fonts/Conso");
         }
 

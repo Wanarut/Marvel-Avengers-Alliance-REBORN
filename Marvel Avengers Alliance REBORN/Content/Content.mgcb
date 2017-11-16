@@ -253,6 +253,78 @@
 /processorParam:TextureFormat=Color
 /build:Character/Cable/Classic/Cable-Temporal_Shift.png
 
+#begin Character/Cable/Classic/Sprite_Cable-Askani_Arts.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Cable/Classic/Sprite_Cable-Askani_Arts.png
+
+#begin Character/Cable/Classic/Sprite_Cable-Bodyslide.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Cable/Classic/Sprite_Cable-Bodyslide.png
+
+#begin Character/Cable/Classic/Sprite_Cable-Plasma_Rifle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Cable/Classic/Sprite_Cable-Plasma_Rifle.png
+
+#begin Character/Cable/Classic/Sprite_Cable-Temporal_Shift.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Cable/Classic/Sprite_Cable-Temporal_Shift.png
+
+#begin Character/Cable/Classic/Sprite_Main.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Cable/Classic/Sprite_Main.png
+
+#begin Character/Cable/Classic/Sprite_was_Hit.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Cable/Classic/Sprite_was_Hit.png
+
 #begin Character/Captain America/Avengers/Captain_America_Icon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2389,6 +2461,30 @@
 /processorParam:TextureFormat=Color
 /build:Component/STAMINA.png
 
+#begin Component/text_cursor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Component/text_cursor.png
+
+#begin Component/textbox.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Component/textbox.png
+
 #begin Component/Turn_Bar.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2400,6 +2496,13 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Component/Turn_Bar.png
+
+#begin Fonts/BigConso.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/BigConso.spritefont
 
 #begin Fonts/Calibri.spritefont
 /importer:FontDescriptionImporter
@@ -2421,6 +2524,18 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Fonts/Georg.spritefont
+
+#begin Songs/Imagine Dragons-Warriors.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/Imagine Dragons-Warriors.mp3
+
+#begin Songs/Thor Ragnarok Soundtrack Song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/Thor Ragnarok Soundtrack Song.mp3
 
 #begin Songs/Vader's Redemption-Major Key.mp3
 /importer:Mp3Importer

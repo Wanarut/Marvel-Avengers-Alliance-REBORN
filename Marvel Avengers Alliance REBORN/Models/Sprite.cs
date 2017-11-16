@@ -332,7 +332,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
        
         public void DrawFrame(SpriteBatch spriteBatch)
         {
-            if (Position.X < MAAGame.SCREEN_WIDTH / 3.5f) DrawFrame(spriteBatch, _cur_column, _cur_row);
+            if (Position.X < MAAGame.SCREEN_WIDTH / 6.0f) DrawFrame(spriteBatch, _cur_column, _cur_row);
             else DrawFrameFlip(spriteBatch);
         }
 

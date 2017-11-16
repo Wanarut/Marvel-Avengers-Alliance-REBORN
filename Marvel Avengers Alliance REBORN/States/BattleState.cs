@@ -39,8 +39,21 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            
+
             TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
+
+            MediaPlayer.IsRepeating = true;
+            heroes.Add(new Deadpool(Content));
+            heroes.Add(new Deadpool(Content));
+            heroes.Add(new Deadpool(Content));
+            heroes.Add(new Deadpool(Content));
+            heroes.Add(new Cable(Content));
+            heroes.Add(new Cable(Content));            
+        }
+
+        public void Set_Heroes(List<Character> avatars)
+        {
+            heroes = avatars;
         }
 
         protected override void Initialize()
@@ -64,7 +77,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             viewport = graphics.GraphicsDevice.Viewport;
 
-            song = Content.Load<Song>("Songs/" + Songs.Vaders_Redemption_Major_Key);    //Set Song
+            song = Content.Load<Song>("Songs/" + Songs.Thor_Ragnarok_Soundtrack_Song);    //Set Song
             MediaPlayer.Volume -= 0.7f;
             MediaPlayer.Play(song);
 
@@ -103,12 +116,12 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             heroes.Add(new Captain_America(Content));
             heroes.Add(new Ant_Man(Content));*/
 
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Captain_America(Content));
-            heroes.Add(new X_23(Content));
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Captain_America(Content));
-            heroes.Add(new X_23(Content));
+            //heroes.Add(new Ant_Man(Content));
+            //heroes.Add(new Captain_America(Content));
+            //heroes.Add(new X_23(Content));
+            //heroes.Add(new Ant_Man(Content));
+            //heroes.Add(new Captain_America(Content));
+            //heroes.Add(new X_23(Content));
 
             /*heroes.Add(new Ant_Man(Content));
             heroes.Add(new Ant_Man(Content));
@@ -144,7 +157,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 //else heroes[i].Set_Sprite_Position(new Vector2(SCREEN_WIDTH - heroes[i].Get_Sprite_Width(), ((i - 1) * 50) - heroes[i].Get_Sprite_Height() + 330));
                 heroes[i].Get_Sprite().Click += Char_was_Clicked;
             }
-            
+
             heroes[cur_turn].Set_Sprite_Focus(true);
 
             base.LoadContent();
@@ -241,7 +254,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         public void Notify(Calculator engine)
         {
 
-        }
+        }     
 
         protected override void Update(GameTime gameTime)
         {

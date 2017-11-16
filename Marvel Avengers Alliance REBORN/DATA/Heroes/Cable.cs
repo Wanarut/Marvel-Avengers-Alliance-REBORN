@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
 {
-    class Captain_America : Character
+    class Cable : Character
     {
-        public Captain_America(ContentManager content)
+        public Cable(ContentManager content)
         {
             #region Set Stat
-            name = Hero.Captain_America;
-            alternate_uniform = Suit.Captain_America_Avengers_Age_of_Ultron;
+            name = Hero.Cable;
+            alternate_uniform = Suit.Cable_Classic;
             _max_health = 7153;
-            _max_stamina = 7153;
-            _attack = 1431;
-            _defense = 1431;
+            _max_stamina = 5722;
+            _attack = 1574;
+            _defense = 1574;
             _accuracy = 1431;
-            _evasion = 1431;
-            _class = _Class.Tactician;
+            _evasion = 1144;
+            _class = _Class.Blaster;
             
             _cur_health = _max_health;
             _cur_stamina = _max_stamina;
@@ -32,11 +32,11 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             #region Set 1st Attack
             _skills = new List<Skill>();
             _skills_buttons = new List<SkillButton>();
-            Skill skill = new Skill("Captain_America-Shield_Bash");
+            Skill skill = new Skill("Cable-Plasma_Rifle");
             skill.Set_Time(2);
-            skill.Set_Stamina_Cost(18);
+            skill.Set_Stamina_Cost(31);
             skill.Set_NumberOfTargets(TargetType.One_Enemy);
-            skill.Set_Damage(868, 1388);
+            skill.Set_Damage(1364, 1636);
             skill.Set_Cooldown(0, 0);
             skill.Set_NumberOfHits(1);
             skill.Set_Hits_Chance(88);
@@ -46,38 +46,38 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             #endregion
 
             #region Set 2nd Attack
-            skill = new Skill("Captain_America-Leading_Strike");
-            skill.Set_Time(2);
-            skill.Set_Stamina_Cost(10);
-            skill.Set_NumberOfTargets(TargetType.One_Enemy);
-            skill.Set_Damage(1066, 1279);
+            skill = new Skill("Cable-Bodyslide");
+            skill.Set_Time(3);
+            skill.Set_Stamina_Cost(25);
+            skill.Set_NumberOfTargets(TargetType.All_Enemies);
+            skill.Set_Damage(644, 772);
             skill.Set_Cooldown(0, 0);
-            skill.Set_NumberOfHits(1);
-            skill.Set_Hits_Chance(92);
-            skill.Set_Cri_Chance(11);
+            skill.Set_NumberOfHits(4);
+            skill.Set_Hits_Chance(74);
+            skill.Set_Cri_Chance(9);
 
             _skills.Add(skill);
             #endregion
 
             #region Set 3rd Attack
-            skill = new Skill("Captain_America-Shield_Throw");
+            skill = new Skill("Cable-Askani_Arts");
             skill.Set_Time(2);
-            skill.Set_Stamina_Cost(25);
-            skill.Set_NumberOfTargets(TargetType.All_Enemies);
-            skill.Set_Damage(570, 855);
+            skill.Set_Stamina_Cost(19);
+            skill.Set_NumberOfTargets(TargetType.One_Enemy);
+            skill.Set_Damage(875, 1050);
             skill.Set_Cooldown(0, 0);
-            skill.Set_NumberOfHits(1);
-            skill.Set_Hits_Chance(94);
-            skill.Set_Cri_Chance(12);
+            skill.Set_NumberOfHits(2);
+            skill.Set_Hits_Chance(93);
+            skill.Set_Cri_Chance(19);
 
             _skills.Add(skill);
             #endregion
 
             #region Set 4th Attack
-            skill = new Skill("Captain_America-Shield_Guard");
+            skill = new Skill("Cable-Temporal_Shift");
             skill.Set_Time(1);
-            skill.Set_Stamina_Cost(15);
-            skill.Set_NumberOfTargets(TargetType.Self);
+            skill.Set_Stamina_Cost(25);
+            skill.Set_NumberOfTargets(TargetType.One_Ally);
             skill.Set_Damage(0, 0);
             skill.Set_Cooldown(2, 2);
             skill.Set_NumberOfHits(1);
@@ -93,27 +93,27 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         {
             switch (_cur_skill.Get_Name())
             {
-                case "Captain_America-Shield_Bash":
+                case "Cable-Plasma_Rifle":
                     #region Skill Motion
                     {
                         
                         break;
                     }
                     #endregion
-                case "Captain_America-Leading_Strike":
+                case "Cable-Bodyslide":
                     #region Skill Motion
                     {
                         
                         break;
                     }
                     #endregion
-                case "Captain_America-Shield_Throw":
+                case "Cable-Askani_Arts":
                     #region Skill Motion
                     {
                         break;
                     }
                     #endregion
-                case "Captain_America-Shield_Guard":
+                case "Cable-Temporal_Shift":
                     #region Skill Motion
                     {
                         
@@ -127,10 +127,20 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         public override void Set_Sprite_Position(Vector2 vector)
         {
             _sprite.Position = vector;
-            _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 4), 
-                                                (int)_sprite.Position.Y + _sprite.Get_Sprite_Height() - 390,
-                                                (int)_sprite.Get_Sprite_Width() / 2, 
-                                                (int)(_sprite.Get_Sprite_Height() / 2)));
+            if (_sprite.Position.X < MAAGame.SCREEN_WIDTH / 4.0f)
+            {
+                _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 6.5f),
+                                                    (int)_sprite.Position.Y - (int)(_sprite.Get_Sprite_Height() / 1.6f),
+                                                    (int)(_sprite.Get_Sprite_Width() / 3.0f),
+                                                    (int)(_sprite.Get_Sprite_Height() / 3) - 15));
+            }
+            else
+            {
+                _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 6.5f) + (int)(_sprite.Get_Sprite_Width() / 2.7f),
+                                                    (int)_sprite.Position.Y - (int)(_sprite.Get_Sprite_Height() / 1.6f),
+                                                    (int)(_sprite.Get_Sprite_Width() / 3.0f),
+                                                    (int)(_sprite.Get_Sprite_Height() / 3) - 15));
+            }
         }
     }
 }

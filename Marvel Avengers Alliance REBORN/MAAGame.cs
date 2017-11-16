@@ -13,7 +13,7 @@ namespace Marvel_Avengers_Alliance_REBORN
     {
         protected GraphicsDeviceManager graphics;
         protected SpriteBatch spriteBatch;
-
+        
         public const int SCREEN_WIDTH = 760;
         public const int SCREEN_HEIGHT = 630;
         
@@ -47,7 +47,7 @@ namespace Marvel_Avengers_Alliance_REBORN
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             //spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -82,10 +82,10 @@ namespace Marvel_Avengers_Alliance_REBORN
         protected override void Draw(GameTime gameTime)
         {
             //GraphicsDevice.Clear(Color.CornflowerBlue);
-
+                        
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
-        }
+        } 
     }
 }

@@ -113,8 +113,9 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                     #region Skill Motion
                     {
                         Vector2 goal;
-                        if (_sprite.Get_Targets()[0].Position.X > MAAGame.SCREEN_WIDTH / 2) goal = new Vector2(_sprite.Get_Targets()[0].Position.X - (_sprite.Get_Targets()[0].Get_Sprite_Width() / 1.2f), _sprite.Get_Targets()[0].Position.Y + 0.01f);
+                        if (_sprite.Get_Targets()[0].Position.X > MAAGame.SCREEN_WIDTH / 6.0f) goal = new Vector2(_sprite.Get_Targets()[0].Position.X - (_sprite.Get_Targets()[0].Get_Sprite_Width() / 1.2f), _sprite.Get_Targets()[0].Position.Y + 0.01f);
                         else goal = new Vector2(_sprite.Get_Targets()[0].Position.X + (_sprite.Get_Targets()[0].Get_Sprite_Width() / 1.2f), _sprite.Get_Targets()[0].Position.Y + 0.01f);
+
                         _sprite.Transition(_sprite.Position, goal, 11, 5);
 
                         _sprite.Transition(goal, _sprite.Position, 35, 5);
@@ -136,5 +137,24 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             }
         }
         #endregion
+
+        public override void Set_Sprite_Position(Vector2 vector)
+        {
+            _sprite.Position = vector;
+            if (_sprite.Position.X < MAAGame.SCREEN_WIDTH / 4.0f)
+            {
+                _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 2.5f),
+                                                    (int)_sprite.Position.Y - (int)(_sprite.Get_Sprite_Height() / 2) + 15,
+                                                    (int)(_sprite.Get_Sprite_Width() / 1.8f),
+                                                    (int)(_sprite.Get_Sprite_Height() / 4) - 5));
+            }
+            else
+            {
+                _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X - (int)(_sprite.Get_Sprite_Width() / 2.5f) + (int)(_sprite.Get_Sprite_Width() / 2.3f),
+                                                    (int)_sprite.Position.Y - (int)(_sprite.Get_Sprite_Height() / 2) + 15,
+                                                    (int)(_sprite.Get_Sprite_Width() / 1.8f),
+                                                    (int)(_sprite.Get_Sprite_Height() / 4) - 5));
+            }
+        }
     }
 }
