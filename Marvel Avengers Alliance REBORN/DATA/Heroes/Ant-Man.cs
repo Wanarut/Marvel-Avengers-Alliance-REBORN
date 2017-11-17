@@ -1,5 +1,6 @@
 ﻿using Marvel_Avengers_Alliance_REBORN.Buttons;
 using Marvel_Avengers_Alliance_REBORN.Models;
+using Marvel_Avengers_Alliance_REBORN.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
@@ -111,7 +112,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                     #region Skill Motion
                     {
                         Vector2 goal;
-                        if (_sprite.Get_Targets()[0].Position.X > MAAGame.SCREEN_WIDTH / 6.0f) goal = new Vector2(_sprite.Get_Targets()[0].Position.X - (_sprite.Get_Targets()[0].Get_Sprite_Width() / 1.2f), _sprite.Get_Targets()[0].Position.Y + 0.01f);
+                        if (BattleState.IsLeft_Side(this)) goal = new Vector2(_sprite.Get_Targets()[0].Position.X - (_sprite.Get_Targets()[0].Get_Sprite_Width() / 1.2f), _sprite.Get_Targets()[0].Position.Y + 0.01f);
                         else goal = new Vector2(_sprite.Get_Targets()[0].Position.X + (_sprite.Get_Targets()[0].Get_Sprite_Width() / 1.2f), _sprite.Get_Targets()[0].Position.Y + 0.01f);
 
                         _sprite.Transition(_sprite.Position, goal, 11, 5);
@@ -139,7 +140,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         public override void Set_Sprite_Position(Vector2 vector)
         {
             _sprite.Position = vector;
-            if (_sprite.Position.X < MAAGame.SCREEN_WIDTH / 4.0f)
+            if (BattleState.IsLeft_Side(this))
             {
                 _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 2.5f),
                                                     (int)_sprite.Position.Y - 180,
@@ -153,6 +154,16 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                                                     (int)(_sprite.Get_Sprite_Width() / 1.8f), 
                                                     100));
             }
+        }
+
+        protected override Vector2 Set_Melee_Goal(Sprite target)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Vector2 Set_Range_Goal(Sprite target)
+        {
+            throw new NotImplementedException();
         }
     }
 }

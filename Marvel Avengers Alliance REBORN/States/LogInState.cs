@@ -33,11 +33,6 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
         public LogInState(MAAGame game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
-
-            //graphics = new GraphicsDeviceManager(this);
-            //Content.RootDirectory = "Content";
-            MediaPlayer.IsRepeating = true;
-
             _menucomponent = new List<Component>();
             _background = new Background();
 
@@ -45,7 +40,6 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             textbox = new Textbox(_content, "textbox1");
             song = _content.Load<Song>("Songs/" + Songs.Imagine_Dragons_Warriors);    //Set Song
-            MediaPlayer.Volume -= 0.2f;
             MediaPlayer.Play(song);
 
             var btn = new MenuButton(_content, Gadget.Agent_Recharge);

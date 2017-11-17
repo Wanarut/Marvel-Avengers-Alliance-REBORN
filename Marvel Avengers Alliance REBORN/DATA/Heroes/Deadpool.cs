@@ -126,9 +126,9 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
 
         public override void Set_Sprite_Position(Vector2 vector)
         {
+            _sprite.Position = vector;
             if (vector.X < MAAGame.SCREEN_WIDTH / 6.0f)
             {
-                _sprite.Position = new Vector2(vector.X - 80, vector.Y);
                 _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 3.4f),
                                                     (int)_sprite.Position.Y - 180,
                                                     (int)(_sprite.Get_Sprite_Width() / 5.2f),
@@ -136,13 +136,21 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             }
             else
             {
-                _sprite.Position = new Vector2(vector.X + 80, vector.Y);
                 _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 3.4f) + (int)(_sprite.Get_Sprite_Width() / 4.5f),
                                                     (int)_sprite.Position.Y - 180,
                                                     (int)(_sprite.Get_Sprite_Width() / 5.2f),
                                                     100));
-
             }
+        }
+
+        protected override Vector2 Set_Melee_Goal(Sprite target)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Vector2 Set_Range_Goal(Sprite target)
+        {
+            throw new NotImplementedException();
         }
     }
 }

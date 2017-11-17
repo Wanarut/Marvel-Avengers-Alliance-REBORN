@@ -77,7 +77,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
             if (!isEnoughStamina)
                 color = Color.Salmon;
 
-            spriteBatch.Draw(_texture, Rectangle,new Rectangle(0,0,_texture.Width,_texture.Height),color,0,Vector2.Zero,SpriteEffects.None,0.1f);
+            spriteBatch.Draw(_texture, Rectangle,new Rectangle(0,0,_texture.Width,_texture.Height),color,0,Vector2.Zero,SpriteEffects.None,0.0f);
             
             if (!isEnoughStamina)
             {

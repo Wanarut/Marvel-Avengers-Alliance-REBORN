@@ -153,6 +153,12 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         #endregion
 
         #region Get Function
+
+        public Rectangle Get_Rectangle()
+        {
+            return Rectangle;
+        }
+
         public Sprite Get_Me()
         {
             return this;
@@ -240,7 +246,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
         public void UpdateFrame(float elapsed)
         {
-            _Depth = (((_cur_position.Y - 330) * (-1)) / 400) + 0.6f;
+            _Depth = (((_cur_position.Y - 330) * (-1)) / 800) + 0.6f;
             //_Depth = (((_cur_position.Y + Get_Sprite_Height() - 330) * (-1)) / 400) + 1.0f;
             //if(_cur_frame % 60 == 29) Console.Out.WriteLine(Position.Y + "has Dept = " + _Depth);
 
@@ -357,7 +363,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         #region Motion Fuction
         public void Transition(Vector2 initial, Vector2 final, int startframe, int number_of_frame)
         {
-            if (hasTarget && _cur_frame >= startframe && _cur_frame <= startframe + number_of_frame)
+            if (hasTarget && _cur_frame >= startframe && _cur_frame <= startframe + number_of_frame - 1)
             {
                 _velocity.X = (float)((final.X - initial.X) / number_of_frame);
                 _velocity.Y = (float)((final.Y - initial.Y) / number_of_frame);

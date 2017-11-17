@@ -31,6 +31,11 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         private int cur_turn;
         protected Viewport viewport;
         #endregion
+                
+        public static bool IsLeft_Side(Character hero)
+        {
+            return (hero.Get_Sprite().Position.X < MAAGame.SCREEN_WIDTH / 6.0f);
+        }
 
         //public BattleState()
         //{
@@ -42,7 +47,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         //    MediaPlayer.IsRepeating = true;
 
         //    TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
-            
+
         //    /*heroes.Add(new Ant_Man(Content));
         //    heroes.Add(new Ant_Man(Content));
         //    heroes.Add(new Deadpool(Content));
@@ -94,6 +99,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             song = _content.Load<Song>("Songs/" + Songs.Thor_Ragnarok_Soundtrack_Song);    //Set Song
             MediaPlayer.Play(song);
+            MediaPlayer.Volume -= 0.4f;
 
             combat_background.LoadContent(_content, "Combat_Background/" + BG.BG_011);  //Set BackGround
 
@@ -149,7 +155,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             heroes[cur_turn].Set_Sprite_Focus(true);
         }
-
+        
         private void Change_Turn(int num_player = BattleState.ONE_PLAYER)
         {
             heroes[cur_turn].Set_Sprite_Focus(false);
@@ -214,13 +220,30 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 targets.Add(((Sprite)sender).Get_Me());
                 Console.Out.WriteLine(targets[0].Get_Char().Get_Name() + " was Selected");
             }
-            else
+            else if (heroes[cur_turn].Get_Cur_Skill().Get_NumberOfTargets() == TargetType.All_Enemies)
             {
-                for(int i = 0; i < heroes.Count; i++)
+                if (IsLeft_Side(heroes[cur_turn]))
                 {
-                    if (i % 2 == 1) targets.Add(heroes[i].Get_Sprite());
+                    foreach(var hero in heroes)
+                    {
+                        if (!IsLeft_Side(hero))
+                        {
+                            targets.Add(hero.Get_Sprite());
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var hero in heroes)
+                    {
+                        if (IsLeft_Side(hero))
+                        {
+                            targets.Add(hero.Get_Sprite());
+                        }
+                    }
                 }
             }
+
             heroes[cur_turn].Set_Target(targets);
 
             heroes[cur_turn].Set_Sprite_HasTarget(true);
@@ -229,7 +252,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             heroes[cur_turn].isPickSkill = false;
 
-            Change_Turn();
+            //Change_Turn();
         }
 
         public void Notify(Calculator engine)
@@ -242,14 +265,14 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             //One Last Stand
             if(heroes.Count == 1) return true;
 
-            if (heroes.Count <= 3)
+            if (heroes.Count == 2)
             {
-                if (!(heroes[0].Get_Sprite().Position.X < (MAAGame.SCREEN_WIDTH / 8) ^ heroes[1].Get_Sprite().Position.X < (MAAGame.SCREEN_WIDTH / 8))) return true;
+                if (!(BattleState.IsLeft_Side(heroes[0]) ^ BattleState.IsLeft_Side(heroes[1]))) return true;
             }
 
             if (heroes.Count == 3)
             {
-
+                if (!(BattleState.IsLeft_Side(heroes[0]) ^ BattleState.IsLeft_Side(heroes[1]) ^ BattleState.IsLeft_Side(heroes[2]))) return true;
             }
 
             return false;
@@ -257,8 +280,6 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
         public override void Update(GameTime gameTime)
         {
-            if(Game_Over()) _game.Change_State(new MapState(_game, _graphicsDevice, _content));
-
             foreach (var avatar in heroes)
                 avatar.Play();
 
@@ -269,6 +290,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 if (avatar.Get_Sprite().Get_IsDead())
                 {
                     heroes.Remove(avatar);
+                    cur_turn--;
                     break;
                 }
 
@@ -276,6 +298,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 avatar._hp_bar.Update(gameTime);
                 avatar._sp_bar.Update(gameTime);
             }
+
+            if (Game_Over()) _game.Change_State(new MapState(_game, _graphicsDevice, _content));
 
             int j = 1;
             for(int i = cur_turn + 1; i != cur_turn; i++)
@@ -303,7 +327,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             combat_background.Draw(spriteBatch);
 
-            empty_status_bar.Draw(spriteBatch);
+            empty_status_bar.Draw(spriteBatch, 0.1f);
 
             foreach (var btn in menu_component)
                 btn.Draw(spriteBatch);

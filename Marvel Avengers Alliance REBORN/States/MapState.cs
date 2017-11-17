@@ -33,20 +33,15 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         private List<Character> enemies;
         #endregion
 
-        /*public MapState(/*List<Character> avatar)
-        {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
-        }*/
-
         public MapState(MAAGame game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
             enemies = new List<Character>();
             Icon_map = new List<IconMap>();
             map_background = new Background();
             enemieslist = new List<IconMap>();
+
+            song = _content.Load<Song>("Songs/" + Songs.Vaders_Redemption_Major_Key);    //Set Song
+            MediaPlayer.Play(song);
 
             map_background.LoadContent(_content, "Map_Background/" + BG.BG_0000);
             button_map0 = new IconMap(_content, MapButton.MB_000);

@@ -26,13 +26,18 @@ namespace Marvel_Avengers_Alliance_REBORN.Components
         {
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, float dept = 1f)
         {
             var color = Color.White;
 
             //spriteBatch.Draw(_texture, Position, color);
             Rectangle source_rect = new Rectangle(0, 0, _texture.Width, _texture.Height);
-            spriteBatch.Draw(_texture, Position, source_rect, color, 0, Vector2.One,1f, SpriteEffects.None, 1f);
+            spriteBatch.Draw(_texture, Position, source_rect, color, 0, Vector2.One,1f, SpriteEffects.None, dept);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

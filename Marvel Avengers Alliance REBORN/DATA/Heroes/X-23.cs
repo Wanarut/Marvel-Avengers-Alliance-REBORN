@@ -1,5 +1,6 @@
 ﻿using Marvel_Avengers_Alliance_REBORN.Buttons;
 using Marvel_Avengers_Alliance_REBORN.Models;
+using Marvel_Avengers_Alliance_REBORN.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
@@ -127,7 +128,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         public override void Set_Sprite_Position(Vector2 vector)
         {
             _sprite.Position = vector;
-            if (_sprite.Position.X < MAAGame.SCREEN_WIDTH / 4.0f)
+            if (BattleState.IsLeft_Side(this))
             {
                 _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 3.0f),
                                                     (int)_sprite.Position.Y - 180,
@@ -141,6 +142,16 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                                                     (int)(_sprite.Get_Sprite_Width() / 3.5f),
                                                     100));
             }
+        }
+
+        protected override Vector2 Set_Melee_Goal(Sprite target)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Vector2 Set_Range_Goal(Sprite target)
+        {
+            throw new NotImplementedException();
         }
     }
 }

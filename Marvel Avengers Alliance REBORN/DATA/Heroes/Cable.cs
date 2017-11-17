@@ -1,5 +1,6 @@
 ﻿using Marvel_Avengers_Alliance_REBORN.Buttons;
 using Marvel_Avengers_Alliance_REBORN.Models;
+using Marvel_Avengers_Alliance_REBORN.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
@@ -103,23 +104,20 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                 case "Cable-Bodyslide":
                     #region Skill Motion
                     {
-                        Vector2 goal;
-                        /*if (_sprite.Get_Targets()[0].Position.X > MAAGame.SCREEN_WIDTH / 6.0f)*/ goal = new Vector2(MAAGame.SCREEN_WIDTH - Get_Sprite_Width() - 270, (2 * 50) + 330);
+                        //for range skill
+                        if (_sprite.Get_Cur_Frame() == 4) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[1]);
 
-                        _sprite.Transition(_sprite.Position, goal, 2, 1);
-                        
-                        /*if (_sprite.Get_Targets()[1].Position.X > MAAGame.SCREEN_WIDTH / 6.0f)*/ goal = new Vector2(MAAGame.SCREEN_WIDTH - Get_Sprite_Width() - 100, (0 * 50) + 330);
+                        if (_sprite.Get_Cur_Frame() == 18) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[0]);                        
 
-                        _sprite.Transition(_sprite._cur_position, goal, 18, 1);
+                        if (_sprite.Get_Cur_Frame() == 25) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[2]);
 
-                        /*if (_sprite.Get_Targets()[2].Position.X > MAAGame.SCREEN_WIDTH / 6.0f)*/ goal = new Vector2(MAAGame.SCREEN_WIDTH - Get_Sprite_Width() - 100, (3 * 50) + 330);
+                        if (_sprite.Get_Cur_Frame() == 36) _sprite._cur_position = _sprite.Position;
 
-                        _sprite.Transition(_sprite._cur_position, goal, 27, 1);
-
-                        _sprite.Transition(goal, _sprite.Position, 36, 1);
-
+                        //Set Hit
                         if (_sprite.Get_Cur_Frame() == 11) _sprite.Set_isHealth_Calculated(true);
                         else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
                         if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
                         else _sprite.Set_isStamina_Calculated(false);
                         break;
@@ -128,6 +126,20 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                 case "Cable-Askani_Arts":
                     #region Skill Motion
                     {
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
+
+                        _sprite.Transition(_sprite.Position, goal, 8, 2);
+
+                        _sprite.Transition(goal, _sprite.Position, 22, 3);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 10) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
@@ -142,6 +154,18 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         }
         #endregion
 
+        protected override Vector2 Set_Melee_Goal(Sprite target)
+        {
+            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X - 200, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width - 120, target.Position.Y + 0.01f);
+        }
+        
+        protected override Vector2 Set_Range_Goal(Sprite target)
+        {
+            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X - 370, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width + 50, target.Position.Y + 0.01f);
+        }
+        
         public override void Set_Sprite_Position(Vector2 vector)
         {
             _sprite.Position = vector;

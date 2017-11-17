@@ -132,5 +132,15 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                                                 (int)_sprite.Get_Sprite_Width() / 2, 
                                                 100));
         }
+
+        protected override Vector2 Set_Melee_Goal(Sprite target)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Vector2 Set_Range_Goal(Sprite target)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

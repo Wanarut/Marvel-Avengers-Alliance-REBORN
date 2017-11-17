@@ -24,7 +24,6 @@ namespace Marvel_Avengers_Alliance_REBORN
         protected MAAGame _game;
         protected State _next_state;
         protected State _cur_state;
-        protected Song song;
 
         public MAAGame()
         {
@@ -61,6 +60,8 @@ namespace Marvel_Avengers_Alliance_REBORN
         /// </summary>
         protected override void LoadContent()
         {
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume -= 1.0f;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             _cur_state = new LogInState(this, graphics.GraphicsDevice, Content);

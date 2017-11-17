@@ -27,7 +27,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected _Class _class;
 
         protected List<SkillButton> _skills_buttons;
-        //protected List<Sprite> _target;
+        protected Vector2 goal = Vector2.Zero;
         protected List<Skill> _skills;
         protected Sprite _sprite;
         protected Skill _cur_skill;
@@ -39,6 +39,12 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
         //public Vector2 Position { get; set; }
         #endregion
+
+        public abstract void Set_Sprite_Position(Vector2 vector);
+
+        protected abstract Vector2 Set_Melee_Goal(Sprite target);
+
+        protected abstract Vector2 Set_Range_Goal(Sprite target);
 
         #region Get Function
         public Sprite Get_Sprite()
@@ -147,8 +153,6 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         {
             _cur_skill = cur_skill;
         }
-
-        public abstract void Set_Sprite_Position(Vector2 vector);
 
         public void Set_Sprite_Focus(bool logic)
         {
