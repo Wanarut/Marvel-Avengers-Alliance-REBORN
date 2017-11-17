@@ -15,7 +15,7 @@ namespace Marvel_Avengers_Alliance_REBORN
         static void Main()
         {
             //var MainGame = new MAAGame();
-            using (var games = new MAAGame())
+            using (var games = new BattleState())
                 games.Run();
         }
     }

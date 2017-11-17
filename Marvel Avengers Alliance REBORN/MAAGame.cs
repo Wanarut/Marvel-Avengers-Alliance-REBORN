@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Content;
 
 namespace Marvel_Avengers_Alliance_REBORN
 {
@@ -34,6 +35,13 @@ namespace Marvel_Avengers_Alliance_REBORN
             graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
             graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
             graphics.ApplyChanges();
+        }
+
+        public MAAGame(MAAGame game, GraphicsDeviceManager graphics, ContentManager content)
+        {
+            _game = game;
+            this.graphics = graphics;
+            Content = content;
         }
 
         /// <summary>

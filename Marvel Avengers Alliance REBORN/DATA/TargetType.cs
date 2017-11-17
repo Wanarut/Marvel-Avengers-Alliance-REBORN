@@ -9,11 +9,11 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
     class TargetType
     {
         #region TargetType
-        public static TargetType Self;
-        public static TargetType One_Ally;
-        public static TargetType One_Enemy;
-        public static TargetType All_Allies;
-        public static TargetType All_Enemies;
+        public static int Self = 0;
+        public static int One_Ally = 1;
+        public static int One_Enemy = 2;
+        public static int All_Allies = 3;
+        public static int All_Enemies = 4;
         #endregion
     }
 }

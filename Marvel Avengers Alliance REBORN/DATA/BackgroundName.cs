@@ -16,5 +16,8 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA
         public const string BG_067 = "Combat_Background_067";
         public const string BG_070 = "Combat_Background_070";
         public const string BG_075 = "Combat_Background_075";
+        public const string BG_0000 = "Map002";
+        public const string SG_001 = "Select_Background_001";
+        public const string SG_002 = "StetusBar";
     }
 }

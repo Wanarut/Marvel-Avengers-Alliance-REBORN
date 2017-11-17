@@ -91,8 +91,6 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         #region Animation Editor
         public override void Check_Skill()
         {
-             //_sprite.Set_Rectangle(new Rectangle((int)_sprite._cur_position.X, (int)_sprite._cur_position.Y - _sprite.Get_Sprite_Width(), _sprite.Get_Sprite_Width(), _sprite.Get_Sprite_Height() / 2));
-
             switch (_cur_skill.Get_Name())
             {
                 case "Ant-Man-Break_In":

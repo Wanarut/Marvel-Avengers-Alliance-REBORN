@@ -42,8 +42,10 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Buttons\Card.cs" />
+    <Compile Include="Buttons\IconMap.cs" />
     <Compile Include="Buttons\MenuButton.cs" />
+    <Compile Include="Buttons\SelectCard.cs" />
+    <Compile Include="Buttons\SelectIcon.cs" />
     <Compile Include="Buttons\SkillButton.cs" />
     <Compile Include="Components\Background.cs" />
     <Compile Include="Components\Button.cs" />
@@ -58,6 +60,8 @@
     <Compile Include="DATA\Heroes\X-23.cs" />
     <Compile Include="DATA\Heroes\Captain America.cs" />
     <Compile Include="DATA\Heroes\Ant-Man.cs" />
+    <Compile Include="DATA\IconHeros.cs" />
+    <Compile Include="DATA\MapButton.cs" />
     <Compile Include="DATA\Songs.cs" />
     <Compile Include="MAAGame.cs" />
     <Compile Include="Models\Calculator.cs" />

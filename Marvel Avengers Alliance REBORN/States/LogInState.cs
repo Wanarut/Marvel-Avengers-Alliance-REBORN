@@ -80,14 +80,11 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 case Gadget.Agent_Recharge:
                     {
                         MediaPlayer.Stop();
-                        List<Character> heroes = new List<Character>();
-                        heroes.Add(new Ant_Man(Content));
-                        heroes.Add(new Ant_Man(Content));
-                        heroes.Add(new Captain_America(Content));
-                        heroes.Add(new Captain_America(Content));
-                        heroes.Add(new Cable(Content));
-                        heroes.Add(new Cable(Content));
-                        _game.Change_State(new BattleState(this, graphics, Content, heroes));
+                        List<Character> enemies = new List<Character>();
+                        enemies.Add(new Ant_Man(Content));
+                        enemies.Add(new Captain_America(Content));
+                        enemies.Add(new Cable(Content));
+                        _game.Change_State(new MapState(this, graphics, Content));
                         break;
                     }
                 case Gadget.Arc_Reactor_Charge:
@@ -103,6 +100,11 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                         break;
                     }
             }
+        }
+
+        protected override void UnloadContent()
+        {
+            base.UnloadContent();
         }
 
         protected void PostUpdate(GameTime gameTime)

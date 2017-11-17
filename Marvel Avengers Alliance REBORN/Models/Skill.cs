@@ -12,7 +12,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         private string _skill_name;
         private int _time_cast;
         private int _stamina_cost;
-        private TargetType _num_targets;
+        private int _num_targets;
         private int[] _damage = new int[2];
         private int[] _cooldown = new int[2];
         private int _num_hits;
@@ -39,7 +39,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             this._stamina_cost = stamina_cost;
         }
 
-        public void Set_NumberOfTargets(TargetType num_targets)
+        public void Set_NumberOfTargets(int num_targets)
         {
             this._num_targets = num_targets;
         }
@@ -88,7 +88,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             return _stamina_cost;
         }
 
-        public TargetType Get_NumberOfTargets()
+        public int Get_NumberOfTargets()
         {
             return _num_targets;
         }

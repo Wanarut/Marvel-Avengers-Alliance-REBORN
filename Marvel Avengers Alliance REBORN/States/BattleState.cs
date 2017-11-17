@@ -36,7 +36,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         {
             heroes = new List<Character>();
 
-            graphics = new GraphicsDeviceManager(this);
+            //graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             MediaPlayer.IsRepeating = true;
@@ -67,10 +67,21 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
         public BattleState(MAAGame game, GraphicsDeviceManager graphicsDevice, ContentManager content, List<Character> avatar)
         {
+            heroes = new List<Character>(6);
+            for (int i = 0; i < 6; i++) heroes.Add(null);
+
             _game = game;
             graphics = graphicsDevice;
             Content = content;
-            heroes = avatar;
+            heroes[0] = avatar[0];
+            heroes[2] = avatar[1];
+            heroes[4] = avatar[2];
+
+            heroes[1] = avatar[3];
+            heroes[3] = avatar[4];
+            heroes[5] = avatar[5];
+
+
 
             //graphics = new GraphicsDeviceManager(this);
             //Content.RootDirectory = "Content";
@@ -90,7 +101,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             cur_turn = 0;
 
-            LoadContent();
+            //LoadContent();
             base.Initialize();
         }
 
@@ -253,8 +264,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             {
                 for(int i = 0; i < heroes.Count; i++)
                 {
-                    targets.Add(heroes[i].Get_Sprite());
-                    if (i % 2 == 1) heroes[cur_turn].Set_Target(targets);
+                    if (i % 2 == 1) targets.Add(heroes[i].Get_Sprite());
                 }
             }
             heroes[cur_turn].Set_Target(targets);
