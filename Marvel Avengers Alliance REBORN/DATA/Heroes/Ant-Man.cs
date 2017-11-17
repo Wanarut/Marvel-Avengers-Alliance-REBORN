@@ -92,7 +92,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         #region Animation Editor
         public override void Check_Skill()
         {
-            switch (_cur_skill.Get_Name())
+            switch (_cur_skill_btn.Get_Skill().Get_Name())
             {
                 case "Ant-Man-Break_In":
                     #region Skill Motion

@@ -92,12 +92,26 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         #region Animation Editor
         public override void Check_Skill()
         {
-            switch (_cur_skill.Get_Name())
+            switch (_cur_skill_btn.Get_Skill().Get_Name())
             {
                 case "Cable-Plasma_Rifle":
                     #region Skill Motion
                     {
-                        
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 8) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 14)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
@@ -105,11 +119,21 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                     #region Skill Motion
                     {
                         //for range skill
-                        if (_sprite.Get_Cur_Frame() == 4) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[1]);
+                        if (_sprite.Get_Cur_Frame() == 8)
+                            if(_sprite.Get_Targets()[1] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[1]);
 
-                        if (_sprite.Get_Cur_Frame() == 18) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[0]);                        
+                        if (_sprite.Get_Cur_Frame() == 18) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[0]);
 
-                        if (_sprite.Get_Cur_Frame() == 25) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[2]);
+                        if (_sprite.Get_Cur_Frame() == 25)
+                            if (_sprite.Get_Targets()[2] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[2]);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 36)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
 
                         if (_sprite.Get_Cur_Frame() == 36) _sprite._cur_position = _sprite.Position;
 
@@ -130,6 +154,14 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                         goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
 
                         _sprite.Transition(_sprite.Position, goal, 8, 2);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 22)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
 
                         _sprite.Transition(goal, _sprite.Position, 22, 3);
 
@@ -146,7 +178,9 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                 case "Cable-Temporal_Shift":
                     #region Skill Motion
                     {
-                        
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion

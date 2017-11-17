@@ -30,7 +30,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected Vector2 goal = Vector2.Zero;
         protected List<Skill> _skills;
         protected Sprite _sprite;
-        protected Skill _cur_skill;
+        protected SkillButton _cur_skill_btn;
         
         public bool isPickSkill = false;
         public StatusBar _hp_bar;
@@ -122,14 +122,14 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             return _skills;
         }
 
-        public List<SkillButton> Get_Skills_Button()
+        public List<SkillButton> Get_Skills_Buttons()
         {
             return _skills_buttons;
         }
 
-        public Skill Get_Cur_Skill()
+        public SkillButton Get_Cur_Skill_Btn()
         {
-            return _cur_skill;
+            return _cur_skill_btn;
         }
 
         public bool Get_Sprite_HasTarget()
@@ -149,9 +149,9 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             _sprite.Set_HasTarget(logic);
         }
 
-        public void Set_Cur_Skill(Skill cur_skill)
+        public void Set_Cur_Skill_Btn(SkillButton cur_skill)
         {
-            _cur_skill = cur_skill;
+            _cur_skill_btn = cur_skill;
         }
 
         public void Set_Sprite_Focus(bool logic)
@@ -205,7 +205,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         #region Order Function
         public void Skill_Action(ContentManager content)
         {
-            _sprite.ChangeTexture(content.Load<Texture2D>("Character/" + name + "/" + alternate_uniform + "/" + "Sprite_" + _cur_skill.Get_Name()), 15, _cur_skill.Get_Time());
+            _sprite.ChangeTexture(content.Load<Texture2D>("Character/" + name + "/" + alternate_uniform + "/" + "Sprite_" + _cur_skill_btn.Get_Skill().Get_Name()), 15, _cur_skill_btn.Get_Skill().Get_Time());
             //Check_Skill();
         }
 

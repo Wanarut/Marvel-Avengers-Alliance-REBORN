@@ -63,15 +63,6 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
         protected Rectangle Rectangle;
 
-        /*public Rectangle Rectangle
-        {
-            get
-            {
-                return new Rectangle((int)_cur_position.X, (int)_cur_position.Y - _frame_height, _frame_width, _frame_height / 2);
-                //return new Rectangle((int)_cur_position.X + (_frame_width / 2) - 65, (int)_cur_position.Y + ((_frame_height / 3)) + 80, _frame_width / 2, (_frame_height / 4) - 5);
-            }
-        }*/
-
         public Vector2 Position { get; set; }
         
         public Sprite(ContentManager content, string hero_name, string uniform_name)
@@ -89,6 +80,11 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
             _frame_height = _cur_texture.Height / 4;
 
             _was_hit_texture = content.Load<Texture2D>("Character/" + hero_name + "/" + uniform_name + "/" + "Sprite_was_Hit");
+        }
+
+        public void Re_Main()
+        {
+            ChangeTexture(_main_texture, 15, 4);
         }
 
         public void ChangeTexture(Texture2D texture, int frame_per_sec, int time_cast)
@@ -303,28 +299,31 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                 }
                 else
                 {
-                    _mychar.Check_Skill();
-                    Calculator engine = new Calculator();
-                    if (isHealthCalculated)
+                    if (_mychar.Get_Cur_Skill_Btn().Get_Skill() != null)
                     {
-                        engine.HeathCalculate(this, _targets);
-                        foreach (var target in _targets)
+                        Calculator engine = new Calculator();
+                        _mychar.Check_Skill();
+                        if (isHealthCalculated)
                         {
-                            target.ChangeTexture(target._was_hit_texture, 1, 1);
+                            engine.HeathCalculate(this, _targets);
+                            foreach (var target in _targets)
+                            {
+                                target.ChangeTexture(target._was_hit_texture, 1, 1);
+                            }
                         }
+                        if (isStaminaCalculated) engine.StaminaCalculate(this);
                     }
                     
-                    if(isStaminaCalculated) engine.StaminaCalculate(this);
                 }
 
                 //Set Back Main
                 if (hasTarget && _cur_frame == _frame_per_sec * _time_cast)
                 {
                     ChangeTexture(_main_texture, 15, 4);
-                    foreach (var target in _targets)
+                    /*foreach (var target in _targets)
                     {
                         target.ChangeTexture(target._main_texture, 15, 4);
-                    }
+                    }*/
                     hasTarget = false;
                     _targets = new List<Sprite>();
                     isFocus = false;

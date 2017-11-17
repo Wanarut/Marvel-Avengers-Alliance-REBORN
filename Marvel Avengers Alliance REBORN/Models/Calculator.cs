@@ -48,7 +48,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         {
             foreach(var target in objects)
             {
-                int total_damage = rand.Next(subject.Get_Char().Get_Cur_Skill().Get_Damage()[0], subject.Get_Char().Get_Cur_Skill().Get_Damage()[1]) + subject.Get_Char().Get_Attack() - target.Get_Char().Get_Defense();
+                int total_damage = rand.Next(subject.Get_Char().Get_Cur_Skill_Btn().Get_Skill().Get_Damage()[0], subject.Get_Char().Get_Cur_Skill_Btn().Get_Skill().Get_Damage()[1]) + subject.Get_Char().Get_Attack() - target.Get_Char().Get_Defense();
 
                 if (total_damage < 0) total_damage = 0;
 
@@ -63,7 +63,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
         public void StaminaCalculate(Sprite actor)
         {
-            int stamina_cost = (actor.Get_Char().Get_Cur_Skill().Get_StaminaCost() * actor.Get_Char().Get_Max_Stamina()) / 100;
+            int stamina_cost = (actor.Get_Char().Get_Cur_Skill_Btn().Get_Skill().Get_StaminaCost() * actor.Get_Char().Get_Max_Stamina()) / 100;
 
             actor.Get_Char().Set_Stamina(actor.Get_Char().Get_Stamina() - stamina_cost);
 

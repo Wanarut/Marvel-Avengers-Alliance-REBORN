@@ -91,7 +91,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         #region Animation Editor
         public override void Check_Skill()
         {
-            switch (_cur_skill.Get_Name())
+            switch (_cur_skill_btn.Get_Skill().Get_Name())
             {
                 case "Captain_America-Shield_Bash":
                     #region Skill Motion

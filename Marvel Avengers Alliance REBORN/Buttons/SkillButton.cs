@@ -28,12 +28,24 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
 
         public Skill Get_Skill()
         {
-            if (_skill.Get_Cooldown()[0] > 0 || !isEnoughStamina) return null;
+            //if (_skill.Get_Cooldown()[0] > 0 || !isEnoughStamina) return null;
             return _skill;
+        }
+
+        public void Decrease_CoolDown()
+        {
+            _skill.Get_Cooldown()[0]--;
+            if (_skill.Get_Cooldown()[0] < 1) _skill.Get_Cooldown()[0] = 0;
+        }
+
+        public void Re_CoolDown()
+        {
+            _skill.Get_Cooldown()[0] = _skill.Get_Cooldown()[1];
         }
 
         public SkillButton Get_me()
         {
+            if (_skill.Get_Cooldown()[0] > 0 || !isEnoughStamina) return null;
             return this;
         }
 
@@ -77,7 +89,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
             if (!isEnoughStamina)
                 color = Color.Salmon;
 
-            spriteBatch.Draw(_texture, Rectangle,new Rectangle(0,0,_texture.Width,_texture.Height),color,0,Vector2.Zero,SpriteEffects.None,0.0f);
+            spriteBatch.Draw(_texture, Rectangle,new Rectangle(0,0,_texture.Width,_texture.Height),color,0,Vector2.Zero,SpriteEffects.None,0.05f);
             
             if (!isEnoughStamina)
             {

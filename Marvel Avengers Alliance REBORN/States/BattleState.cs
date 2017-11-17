@@ -158,6 +158,9 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         
         private void Change_Turn(int num_player = BattleState.ONE_PLAYER)
         {
+            foreach (var btnskill in heroes[cur_turn].Get_Skills_Buttons())
+                btnskill.Decrease_CoolDown();
+
             heroes[cur_turn].Set_Sprite_Focus(false);
             if(num_player == 1)
             {
@@ -200,8 +203,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         private void BtnAttack_was_Clicked(object sender, EventArgs e)
         {
             if (heroes[cur_turn].Get_Sprite_HasTarget()) return;
-            heroes[cur_turn].Set_Cur_Skill(((SkillButton)sender).Get_Skill());
-            if (heroes[cur_turn].Get_Cur_Skill() == null) return;
+            heroes[cur_turn].Set_Cur_Skill_Btn(((SkillButton)sender).Get_me());
+            if (heroes[cur_turn].Get_Cur_Skill_Btn() == null) return;
             Console.Out.WriteLine("Skill " + ((SkillButton)sender).Get_Skill().Get_Name()  + " of " + heroes[cur_turn].Get_Name() + " was Clicked");
             heroes[cur_turn].isPickSkill = true;
             heroes[cur_turn].Set_Sprite_Focus(false);
@@ -210,49 +213,134 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         private void Char_was_Clicked(object sender, EventArgs e)
         {
             heroes[cur_turn].Set_Sprite_HasTarget(false);
-
+            
             if (!heroes[cur_turn].isPickSkill) return;
+
+            if (heroes[cur_turn].Get_Cur_Skill_Btn().Get_me() == null) return;
 
             List<Sprite> targets = new List<Sprite>();
 
-            if (heroes[cur_turn].Get_Cur_Skill().Get_NumberOfTargets() == TargetType.One_Enemy)
+            switch (heroes[cur_turn].Get_Cur_Skill_Btn().Get_Skill().Get_NumberOfTargets())
             {
-                targets.Add(((Sprite)sender).Get_Me());
-                Console.Out.WriteLine(targets[0].Get_Char().Get_Name() + " was Selected");
-            }
-            else if (heroes[cur_turn].Get_Cur_Skill().Get_NumberOfTargets() == TargetType.All_Enemies)
-            {
-                if (IsLeft_Side(heroes[cur_turn]))
-                {
-                    foreach(var hero in heroes)
+                case 0: //Self = 0
                     {
-                        if (!IsLeft_Side(hero))
+                        if (((Sprite)sender).Get_Me() == heroes[cur_turn].Get_Sprite())
                         {
-                            targets.Add(hero.Get_Sprite());
+                            targets.Add(heroes[cur_turn].Get_Sprite());
+
+                            heroes[cur_turn].Set_Sprite_HasTarget(true);
+
+                            heroes[cur_turn].Skill_Action(_content);
+
+                            heroes[cur_turn].isPickSkill = false;
+
+                            heroes[cur_turn].Get_Cur_Skill_Btn().Re_CoolDown();
                         }
+                        break;
                     }
-                }
-                else
-                {
-                    foreach (var hero in heroes)
+                case 1: //One_Ally = 1
                     {
-                        if (IsLeft_Side(hero))
+                        if(!(IsLeft_Side(((Sprite)sender).Get_Me().Get_Char()) ^ IsLeft_Side(heroes[cur_turn])))
                         {
-                            targets.Add(hero.Get_Sprite());
+                            targets.Add(((Sprite)sender).Get_Me());
+
+                            heroes[cur_turn].Set_Sprite_HasTarget(true);
+
+                            heroes[cur_turn].Skill_Action(_content);
+
+                            heroes[cur_turn].isPickSkill = false;
+
+                            heroes[cur_turn].Get_Cur_Skill_Btn().Re_CoolDown();
                         }
+                        break;
                     }
-                }
+                case 2: //One_Enemy = 2
+                    {
+                        if ((IsLeft_Side(((Sprite)sender).Get_Me().Get_Char()) ^ IsLeft_Side(heroes[cur_turn])))
+                        {
+                            targets.Add(((Sprite)sender).Get_Me());
+
+                            heroes[cur_turn].Set_Sprite_HasTarget(true);
+
+                            heroes[cur_turn].Skill_Action(_content);
+
+                            heroes[cur_turn].isPickSkill = false;
+
+                            heroes[cur_turn].Get_Cur_Skill_Btn().Re_CoolDown();
+                        }
+                        break;
+                    }
+                case 3: //All_Allies = 3
+                    {
+                        if (!(IsLeft_Side(((Sprite)sender).Get_Me().Get_Char()) ^ IsLeft_Side(heroes[cur_turn])))
+                        {
+                            if (IsLeft_Side(heroes[cur_turn]))
+                            {
+                                foreach (var hero in heroes)
+                                {
+                                    if (IsLeft_Side(hero))
+                                    {
+                                        targets.Add(hero.Get_Sprite());
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (var hero in heroes)
+                                {
+                                    if (!IsLeft_Side(hero))
+                                    {
+                                        targets.Add(hero.Get_Sprite());
+                                    }
+                                }
+                            }
+                            heroes[cur_turn].Set_Sprite_HasTarget(true);
+
+                            heroes[cur_turn].Skill_Action(_content);
+
+                            heroes[cur_turn].isPickSkill = false;
+
+                            heroes[cur_turn].Get_Cur_Skill_Btn().Re_CoolDown();
+                        }
+                        break;
+                    }
+                case 4: //All_Enemies = 4
+                    {
+                        if ((IsLeft_Side(((Sprite)sender).Get_Me().Get_Char()) ^ IsLeft_Side(heroes[cur_turn])))
+                        {
+                            if (IsLeft_Side(heroes[cur_turn]))
+                            {
+                                foreach (var hero in heroes)
+                                {
+                                    if (!IsLeft_Side(hero))
+                                    {
+                                        targets.Add(hero.Get_Sprite());
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (var hero in heroes)
+                                {
+                                    if (IsLeft_Side(hero))
+                                    {
+                                        targets.Add(hero.Get_Sprite());
+                                    }
+                                }
+                            }
+                            heroes[cur_turn].Set_Sprite_HasTarget(true);
+
+                            heroes[cur_turn].Skill_Action(_content);
+
+                            heroes[cur_turn].isPickSkill = false;
+
+                            heroes[cur_turn].Get_Cur_Skill_Btn().Re_CoolDown();
+                        }
+                        break;
+                    }
             }
 
             heroes[cur_turn].Set_Target(targets);
-
-            heroes[cur_turn].Set_Sprite_HasTarget(true);
-
-            heroes[cur_turn].Skill_Action(_content);
-
-            heroes[cur_turn].isPickSkill = false;
-
-            //Change_Turn();
         }
 
         public void Notify(Calculator engine)
@@ -312,7 +400,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             //heroes[cur_turn]._small_icon.Position = new Vector2(277, 0);
 
-            foreach (var btnskill in heroes[cur_turn].Get_Skills_Button())
+            foreach (var btnskill in heroes[cur_turn].Get_Skills_Buttons())
                 btnskill.Update(heroes[cur_turn]);
 
             foreach (var btn in menu_component)
@@ -343,7 +431,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 else heroes[i]._small_icon.Draw(spriteBatch, 0.66f, effect);
             }
 
-            foreach (var btnskill in heroes[cur_turn].Get_Skills_Button())
+            foreach (var btnskill in heroes[cur_turn].Get_Skills_Buttons())
                 btnskill.Draw(spriteBatch);
 
             turn_bar.Draw(spriteBatch);
