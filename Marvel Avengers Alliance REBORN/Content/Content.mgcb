@@ -2981,6 +2981,18 @@
 /processorParam:TextureFormat=Color
 /build:MapButton/Ant-Man_1_Task_Icon.png
 
+#begin MapButton/cable_1_Task_Icon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapButton/cable_1_Task_Icon.png
+
 #begin MapButton/Captain_America_3_Task_Icon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3040,6 +3052,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MapButton/Mon-Any-Man.png
+
+#begin MapButton/Mon-Cable.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapButton/Mon-Cable.png
 
 #begin MapButton/Mon-Captain.png
 /importer:TextureImporter

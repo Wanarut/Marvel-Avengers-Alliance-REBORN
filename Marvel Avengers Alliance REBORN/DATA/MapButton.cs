@@ -12,13 +12,13 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA
         public const string MB_001 = "Captain_America_3_Task_Icon";
         public const string MB_002 = "Deadpool_1_Task_Icon";
         public const string MB_003 = "Hulk_1_Task_Icon";
-        public const string MB_004 = "Mr._Fantastic_1_Task_Icon";
+        public const string MB_004 = "cable_1_Task_Icon";
         public const string MB_005 = "War_Task_Icon";
         public const string IC_000 = "IconBB";
         public const string IC_001 = "Mon-Any-Man";
         public const string IC_002 = "Mon-Captain";
         public const string IC_003 = "Mon-Deadpool";
-        public const string IC_004 = "Mon-GhostRider";
+        public const string IC_004 = "Mon-Cable";
         public const string IC_005 = "Mon-Hulk";
         public const string IC_006 = "Mon-X-23";
         public const string IC_007 = "Nextt";

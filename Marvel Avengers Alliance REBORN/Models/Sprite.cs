@@ -359,8 +359,8 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         {
             if (hasTarget && _cur_frame >= startframe && _cur_frame <= startframe + number_of_frame)
             {
-                _velocity.X = (final.X - initial.X) / number_of_frame;
-                _velocity.Y = (final.Y - initial.Y) / number_of_frame;
+                _velocity.X = (float)((final.X - initial.X) / number_of_frame);
+                _velocity.Y = (float)((final.Y - initial.Y) / number_of_frame);
 
                 _cur_position.X += _velocity.X;
                 _cur_position.Y += _velocity.Y;

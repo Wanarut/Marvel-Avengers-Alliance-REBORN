@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Marvel_Avengers_Alliance_REBORN.States
 {
-    class BattleState : MAAGame
+    class BattleState : State
     {
         public const int ONE_PLAYER = 1;
         public const int TWO_PLAYER = 2;
@@ -32,47 +32,48 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         protected Viewport viewport;
         #endregion
 
-        public BattleState(/*List<Character> avatar*/)
-        {
-            heroes = new List<Character>();
+        //public BattleState()
+        //{
+        //    heroes = new List<Character>();
 
-            //graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-            MediaPlayer.IsRepeating = true;
+        //    //graphics = new GraphicsDeviceManager(this);
+        //    Content.RootDirectory = "Content";
+        //    IsMouseVisible = true;
+        //    MediaPlayer.IsRepeating = true;
 
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
+        //    TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
             
-            /*heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Deadpool(Content));
-            heroes.Add(new Deadpool(Content));
-            heroes.Add(new Cable(Content));
-            heroes.Add(new Cable(Content));*/
+        //    /*heroes.Add(new Ant_Man(Content));
+        //    heroes.Add(new Ant_Man(Content));
+        //    heroes.Add(new Deadpool(Content));
+        //    heroes.Add(new Deadpool(Content));
+        //    heroes.Add(new Cable(Content));
+        //    heroes.Add(new Cable(Content));*/
 
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Captain_America(Content));
-            heroes.Add(new Captain_America(Content));
-            heroes.Add(new Cable(Content));
-            heroes.Add(new Cable(Content));
+        //    //heroes.Add(new Ant_Man(Content));
+        //    //heroes.Add(new Ant_Man(Content));
+        //    //heroes.Add(new Captain_America(Content));
+        //    //heroes.Add(new Captain_America(Content));
+        //    heroes.Add(new Cable(Content));
+        //    heroes.Add(new Ant_Man(Content));
+        //    heroes.Add(new Cable(Content));
+        //    heroes.Add(new Ant_Man(Content));
+        //    heroes.Add(new Cable(Content));
+        //    heroes.Add(new Cable(Content));
 
-            /*heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Captain_America(Content));
-            heroes.Add(new Cable(Content));
-            heroes.Add(new Deadpool(Content));
-            heroes.Add(new Hulk(Content));
-            heroes.Add(new X_23(Content));*/
-        }
+        //    /*heroes.Add(new Ant_Man(Content));
+        //    heroes.Add(new Captain_America(Content));
+        //    heroes.Add(new Cable(Content));
+        //    heroes.Add(new Deadpool(Content));
+        //    heroes.Add(new Hulk(Content));
+        //    heroes.Add(new X_23(Content));*/
+        //}
 
-        public BattleState(MAAGame game, GraphicsDeviceManager graphicsDevice, ContentManager content, List<Character> avatar)
+        public BattleState(MAAGame game, GraphicsDevice graphicsDevice, ContentManager content, List<Character> avatar) : base(game, graphicsDevice, content)
         {
             heroes = new List<Character>(6);
             for (int i = 0; i < 6; i++) heroes.Add(null);
-
-            _game = game;
-            graphics = graphicsDevice;
-            Content = content;
+            
             heroes[0] = avatar[0];
             heroes[2] = avatar[1];
             heroes[4] = avatar[2];
@@ -81,18 +82,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             heroes[3] = avatar[4];
             heroes[5] = avatar[5];
 
+            game.TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
 
-
-            //graphics = new GraphicsDeviceManager(this);
-            //Content.RootDirectory = "Content";
-            IsMouseVisible = true;
-            MediaPlayer.IsRepeating = true;
-
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
-        }
-
-        protected override void Initialize()
-        {
             combat_background = new Background();
             empty_status_bar = new Background();
             turn_bar = new Background();
@@ -101,99 +92,62 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             cur_turn = 0;
 
-            //LoadContent();
-            base.Initialize();
-        }
-
-        protected override void LoadContent()
-        {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            viewport = graphics.GraphicsDevice.Viewport;
-            song = Content.Load<Song>("Songs/" + Songs.Thor_Ragnarok_Soundtrack_Song);    //Set Song
-            //MediaPlayer.Volume -= 0.2f;
+            song = _content.Load<Song>("Songs/" + Songs.Thor_Ragnarok_Soundtrack_Song);    //Set Song
             MediaPlayer.Play(song);
 
-            combat_background.LoadContent(Content, "Combat_Background/" + BG.BG_011);  //Set BackGround
+            combat_background.LoadContent(_content, "Combat_Background/" + BG.BG_011);  //Set BackGround
 
-            empty_status_bar.LoadContent(Content, "Component/" + Gadget.Empty_Status_Bar);
+            empty_status_bar.LoadContent(_content, "Component/" + Gadget.Empty_Status_Bar);
             empty_status_bar.Position = new Vector2(0, 630 - empty_status_bar.Get_Height());
-            turn_bar.LoadContent(Content, "Component/" + Gadget.Turn_Bar);
-            turn_bar.Position = new Vector2((SCREEN_WIDTH / 2) - (turn_bar.Get_Width() / 2), 0);
+            turn_bar.LoadContent(_content, "Component/" + Gadget.Turn_Bar);
+            turn_bar.Position = new Vector2((MAAGame.SCREEN_WIDTH / 2) - (turn_bar.Get_Width() / 2), 0);
 
             #region Load Menu
-            var btn = new MenuButton(Content, Gadget.Agent_Recharge);
+            var btn = new MenuButton(_content, Gadget.Agent_Recharge);
             btn.Position = new Vector2(((combat_background.Get_Width() - btn.Get_Width()) / 2) + ((4 - 0) * (btn.Get_Width() + 8)) - (btn.Get_Width() / 2), 496);
             menu_component.Add(btn);
             btn.Click += Menu_was_Clicked;
-            btn = new MenuButton(Content, Gadget.Agent_Inventory);
+            btn = new MenuButton(_content, Gadget.Agent_Inventory);
             btn.Position = new Vector2(((combat_background.Get_Width() - btn.Get_Width()) / 2) + ((4 - 1) * (btn.Get_Width() + 8)) - (btn.Get_Width() / 2), 496);
             menu_component.Add(btn);
             btn.Click += Menu_was_Clicked;
-            btn = new MenuButton(Content, Gadget.Curative_Measure);
+            btn = new MenuButton(_content, Gadget.Curative_Measure);
             btn.Position = new Vector2(((combat_background.Get_Width() - btn.Get_Width()) / 2) + ((4 - 2) * (btn.Get_Width() + 8)) - (btn.Get_Width() / 2), 496);
             menu_component.Add(btn);
             btn.Click += Menu_was_Clicked;
-            btn = new MenuButton(Content, Gadget.Arc_Reactor_Charge);
+            btn = new MenuButton(_content, Gadget.Arc_Reactor_Charge);
             btn.Position = new Vector2(((combat_background.Get_Width() - btn.Get_Width()) / 2) + ((4 - 3) * (btn.Get_Width() + 8)) - (btn.Get_Width() / 2), 496);
             menu_component.Add(btn);
             btn.Click += Menu_was_Clicked;
             #endregion
 
-            //heroes.Add(new Ant_Man(Content));
-            /*heroes.Add(new Captain_America(Content));
-            heroes.Add(new Ant_Man(Content));
-
-            heroes.Add(new Captain_America(Content));
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Captain_America(Content));
-            heroes.Add(new Ant_Man(Content));*/
-
-            //heroes.Add(new Ant_Man(Content));
-            //heroes.Add(new Captain_America(Content));
-            //heroes.Add(new X_23(Content));
-            //heroes.Add(new Ant_Man(Content));
-            //heroes.Add(new Captain_America(Content));
-            //heroes.Add(new X_23(Content));
-
-            /*heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Ant_Man(Content));*/
-
             for (int i = 0; i < heroes.Count; i++)
             {
-                for(int j = 0; j < heroes[i].Get_Skills().Count; j++)
+                for (int j = 0; j < heroes[i].Get_Skills().Count; j++)
                 {
-                    var btnskill = new SkillButton(Content, heroes[i].Get_Name(), heroes[i].Get_Uniform(), heroes[i].Get_Skills()[j]);
+                    var btnskill = new SkillButton(_content, heroes[i].Get_Name(), heroes[i].Get_Uniform(), heroes[i].Get_Skills()[j]);
                     btnskill.Position = new Vector2(((combat_background.Get_Width() - btnskill.Get_Width()) / 2) + ((j - 4) * (btnskill.Get_Width() + 8)) + (btnskill.Get_Width() / 2), 496);
                     btnskill.Click += BtnAttack_was_Clicked;
                     heroes[i].Add_Skill_Button(btnskill);
                 }
-                heroes[i]._hp_bar = new StatusBar(heroes[i].Get_Name(), heroes[i].Get_Max_Health(),Gadget.HEALTH, Content);
-                if (i % 2 == 0) heroes[i]._hp_bar.Position = new Vector2(7, SCREEN_HEIGHT - 72 + (i * 12));
-                else heroes[i]._hp_bar.Position = new Vector2(389, SCREEN_HEIGHT - 72 + ((i - 1) * 12));
-                heroes[i]._sp_bar = new StatusBar(heroes[i].Get_Name(), heroes[i].Get_Max_Stamina(), Gadget.STAMINA, Content);
-                if (i % 2 == 0) heroes[i]._sp_bar.Position = new Vector2(7, SCREEN_HEIGHT - 62 + (i * 12));
-                else heroes[i]._sp_bar.Position = new Vector2(389, SCREEN_HEIGHT - 62 + ((i - 1) * 12));
+                heroes[i]._hp_bar = new StatusBar(heroes[i].Get_Name(), heroes[i].Get_Max_Health(), Gadget.HEALTH, _content);
+                if (i % 2 == 0) heroes[i]._hp_bar.Position = new Vector2(7, MAAGame.SCREEN_HEIGHT - 72 + (i * 12));
+                else heroes[i]._hp_bar.Position = new Vector2(389, MAAGame.SCREEN_HEIGHT - 72 + ((i - 1) * 12));
+                heroes[i]._sp_bar = new StatusBar(heroes[i].Get_Name(), heroes[i].Get_Max_Stamina(), Gadget.STAMINA, _content);
+                if (i % 2 == 0) heroes[i]._sp_bar.Position = new Vector2(7, MAAGame.SCREEN_HEIGHT - 62 + (i * 12));
+                else heroes[i]._sp_bar.Position = new Vector2(389, MAAGame.SCREEN_HEIGHT - 62 + ((i - 1) * 12));
 
-                heroes[i]._small_icon = new Icon(Content, heroes[i].Get_Name(), heroes[i].Get_Uniform());
-                if(i == 0) heroes[i]._small_icon.Position = new Vector2(277, 0);
+                heroes[i]._small_icon = new Icon(_content, heroes[i].Get_Name(), heroes[i].Get_Uniform());
+                if (i == 0) heroes[i]._small_icon.Position = new Vector2(277, 0);
                 else heroes[i]._small_icon.Position = new Vector2(295 + (i * 30), 6);
 
-                heroes[i].Load_Sprite(Content, heroes[i].Get_Name(), heroes[i].Get_Uniform());
+                heroes[i].Load_Sprite(_content, heroes[i].Get_Name(), heroes[i].Get_Uniform());
                 if (i % 2 == 0) heroes[i].Set_Sprite_Position(new Vector2(0, (i * 50) + 330));
-                else heroes[i].Set_Sprite_Position(new Vector2(SCREEN_WIDTH - heroes[i].Get_Sprite_Width(), ((i - 1) * 50) + 330));
-                //if(i % 2 == 0) heroes[i].Set_Sprite_Position(new Vector2(0, (i * 50) - heroes[i].Get_Sprite_Height() + 330));
-                //else heroes[i].Set_Sprite_Position(new Vector2(SCREEN_WIDTH - heroes[i].Get_Sprite_Width(), ((i - 1) * 50) - heroes[i].Get_Sprite_Height() + 330));
+                else heroes[i].Set_Sprite_Position(new Vector2(MAAGame.SCREEN_WIDTH - heroes[i].Get_Sprite_Width(), ((i - 1) * 50) + 330));
                 heroes[i].Get_Sprite().Click += Char_was_Clicked;
             }
 
             heroes[cur_turn].Set_Sprite_Focus(true);
-
-            //base.LoadContent();
         }
 
         private void Change_Turn(int num_player = BattleState.ONE_PLAYER)
@@ -271,25 +225,40 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             heroes[cur_turn].Set_Sprite_HasTarget(true);
 
-            heroes[cur_turn].Skill_Action(Content);
+            heroes[cur_turn].Skill_Action(_content);
 
             heroes[cur_turn].isPickSkill = false;
 
             Change_Turn();
         }
 
-        protected override void UnloadContent()
-        {
-            base.UnloadContent();
-        }
-
         public void Notify(Calculator engine)
         {
 
-        }     
+        }
 
-        protected override void Update(GameTime gameTime)
+        private bool Game_Over()
         {
+            //One Last Stand
+            if(heroes.Count == 1) return true;
+
+            if (heroes.Count <= 3)
+            {
+                if (!(heroes[0].Get_Sprite().Position.X < (MAAGame.SCREEN_WIDTH / 8) ^ heroes[1].Get_Sprite().Position.X < (MAAGame.SCREEN_WIDTH / 8))) return true;
+            }
+
+            if (heroes.Count == 3)
+            {
+
+            }
+
+            return false;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if(Game_Over()) _game.Change_State(new MapState(_game, _graphicsDevice, _content));
+
             foreach (var avatar in heroes)
                 avatar.Play();
 
@@ -328,9 +297,9 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             //base.Update(gameTime);
         }
 
-        protected override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin(sortMode:SpriteSortMode.BackToFront);
+            spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront);
 
             combat_background.Draw(spriteBatch);
 
@@ -339,21 +308,13 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             foreach (var btn in menu_component)
                 btn.Draw(spriteBatch);
 
-            /*foreach (var avatar in heroes)
-            {
-                avatar.Draw_Sprite(gameTime, spriteBatch);
-                avatar._hp_bar.Draw(spriteBatch);
-                avatar._sp_bar.Draw(spriteBatch);
-                avatar._small_icon.Draw(spriteBatch, 0.8f);
-            }*/
-
-            for(int i = 0; i < heroes.Count; i++)
+            for (int i = 0; i < heroes.Count; i++)
             {
                 heroes[i].Draw_Sprite(gameTime, spriteBatch);
                 heroes[i]._hp_bar.Draw(spriteBatch);
                 heroes[i]._sp_bar.Draw(spriteBatch);
                 SpriteEffects effect = SpriteEffects.None;
-                if(heroes[i].Get_Sprite().Position.X > MAAGame.SCREEN_WIDTH / 4.0f) effect = SpriteEffects.FlipHorizontally;
+                if (heroes[i].Get_Sprite().Position.X > MAAGame.SCREEN_WIDTH / 4.0f) effect = SpriteEffects.FlipHorizontally;
                 if (i == cur_turn) heroes[i]._small_icon.Draw(spriteBatch, 1, effect);
                 else heroes[i]._small_icon.Draw(spriteBatch, 0.66f, effect);
             }
@@ -364,8 +325,11 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             turn_bar.Draw(spriteBatch);
 
             spriteBatch.End();
+        }
 
-            //base.Draw(gameTime);
+        public override void PostUpdate(GameTime gameTime)
+        {
+
         }
     }
 }

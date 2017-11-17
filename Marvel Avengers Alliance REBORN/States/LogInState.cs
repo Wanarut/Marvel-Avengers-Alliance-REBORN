@@ -17,56 +17,38 @@ using System.Threading.Tasks;
 
 namespace Marvel_Avengers_Alliance_REBORN.States
 {
-    class LogInState : MAAGame
+    class LogInState : State
     {
         private List<Component> _menucomponent;
         private Background _background;
         private Textbox textbox;
 
-        public LogInState()
+        /*public LogInState()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             MediaPlayer.IsRepeating = true;
-        }
+        }*/
 
-        public LogInState(MAAGame game, GraphicsDeviceManager graphicsDevice, ContentManager content)
+        public LogInState(MAAGame game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, graphicsDevice, content)
         {
-            _game = game;
-            graphics = graphicsDevice;
-            Content = content;
 
             //graphics = new GraphicsDeviceManager(this);
             //Content.RootDirectory = "Content";
-            IsMouseVisible = true;
             MediaPlayer.IsRepeating = true;
-
-            TargetElapsedTime = TimeSpan.FromSeconds(1 / 15.0); // Frame rate is 15 fps.
-        }
-
-        protected override void Initialize()
-        {
-            Set_Windows_size(SCREEN_WIDTH, SCREEN_HEIGHT);
 
             _menucomponent = new List<Component>();
             _background = new Background();
 
-            base.Initialize();
-        }
+            _background.LoadContent(_content, "Combat_Background/" + BG.BG_024);  //Set BackGround
 
-        protected override void LoadContent()
-        {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            _background.LoadContent(Content, "Combat_Background/" + BG.BG_024);  //Set BackGround
-
-            textbox = new Textbox(Content, "textbox1");
-            song = Content.Load<Song>("Songs/" + Songs.Imagine_Dragons_Warriors);    //Set Song
+            textbox = new Textbox(_content, "textbox1");
+            song = _content.Load<Song>("Songs/" + Songs.Imagine_Dragons_Warriors);    //Set Song
             MediaPlayer.Volume -= 0.2f;
             MediaPlayer.Play(song);
 
-            var btn = new MenuButton(Content, Gadget.Agent_Recharge);
+            var btn = new MenuButton(_content, Gadget.Agent_Recharge);
             btn.Position = new Vector2(674, 230);
             _menucomponent.Add(btn);
             btn.Click += Menu_was_Clicked;
@@ -81,10 +63,10 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                     {
                         MediaPlayer.Stop();
                         List<Character> enemies = new List<Character>();
-                        enemies.Add(new Ant_Man(Content));
-                        enemies.Add(new Captain_America(Content));
-                        enemies.Add(new Cable(Content));
-                        _game.Change_State(new MapState(this, graphics, Content));
+                        enemies.Add(new Ant_Man(_content));
+                        enemies.Add(new Captain_America(_content));
+                        enemies.Add(new Cable(_content));
+                        _game.Change_State(new MapState(_game, _graphicsDevice, _content));
                         break;
                     }
                 case Gadget.Arc_Reactor_Charge:
@@ -102,25 +84,15 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             }
         }
 
-        protected override void UnloadContent()
-        {
-            base.UnloadContent();
-        }
-
-        protected void PostUpdate(GameTime gameTime)
-        {
-            
-        }
-
-        protected override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             foreach (var btn in _menucomponent)
                 btn.Update(gameTime);
 
             textbox.Update(gameTime);
         }
-
-        protected override void Draw(GameTime gameTime)
+        
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 
@@ -131,6 +103,11 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 btn.Draw(spriteBatch);
 
             spriteBatch.End();
+        }
+
+        public override void PostUpdate(GameTime gameTime)
+        {
+
         }
     }
 }

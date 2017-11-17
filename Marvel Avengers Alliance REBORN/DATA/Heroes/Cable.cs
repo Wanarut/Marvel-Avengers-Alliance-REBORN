@@ -104,19 +104,19 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                     #region Skill Motion
                     {
                         Vector2 goal;
-                        /*if (_sprite.Get_Targets()[0].Position.X > MAAGame.SCREEN_WIDTH / 6.0f)*/ goal = new Vector2(MAAGame.SCREEN_WIDTH - Get_Sprite_Width() - 100, (0 * 50) + 330);
+                        /*if (_sprite.Get_Targets()[0].Position.X > MAAGame.SCREEN_WIDTH / 6.0f)*/ goal = new Vector2(MAAGame.SCREEN_WIDTH - Get_Sprite_Width() - 270, (2 * 50) + 330);
 
-                        _sprite.Transition(_sprite.Position, goal, 4, 5);
+                        _sprite.Transition(_sprite.Position, goal, 2, 1);
                         
-                        /*if (_sprite.Get_Targets()[1].Position.X > MAAGame.SCREEN_WIDTH / 6.0f)*/ goal = new Vector2(MAAGame.SCREEN_WIDTH - Get_Sprite_Width() - 100, (1 * 50) + 330);
+                        /*if (_sprite.Get_Targets()[1].Position.X > MAAGame.SCREEN_WIDTH / 6.0f)*/ goal = new Vector2(MAAGame.SCREEN_WIDTH - Get_Sprite_Width() - 100, (0 * 50) + 330);
 
                         _sprite.Transition(_sprite._cur_position, goal, 18, 1);
 
-                        /*if (_sprite.Get_Targets()[2].Position.X > MAAGame.SCREEN_WIDTH / 6.0f)*/ goal = new Vector2(MAAGame.SCREEN_WIDTH - Get_Sprite_Width() - 100, (2 * 50) + 330);
+                        /*if (_sprite.Get_Targets()[2].Position.X > MAAGame.SCREEN_WIDTH / 6.0f)*/ goal = new Vector2(MAAGame.SCREEN_WIDTH - Get_Sprite_Width() - 100, (3 * 50) + 330);
 
                         _sprite.Transition(_sprite._cur_position, goal, 27, 1);
 
-                        _sprite.Transition(goal, _sprite.Position, 36, 5);
+                        _sprite.Transition(goal, _sprite.Position, 36, 1);
 
                         if (_sprite.Get_Cur_Frame() == 11) _sprite.Set_isHealth_Calculated(true);
                         else _sprite.Set_isHealth_Calculated(false);

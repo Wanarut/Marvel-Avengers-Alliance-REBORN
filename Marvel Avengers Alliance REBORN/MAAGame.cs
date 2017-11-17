@@ -22,8 +22,8 @@ namespace Marvel_Avengers_Alliance_REBORN
         public const int SCREEN_HEIGHT = 630;
 
         protected MAAGame _game;
-        protected MAAGame _next_state;
-        protected MAAGame _cur_state;
+        protected State _next_state;
+        protected State _cur_state;
         protected Song song;
 
         public MAAGame()
@@ -62,18 +62,8 @@ namespace Marvel_Avengers_Alliance_REBORN
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            //spriteBatch = new SpriteBatch(GraphicsDevice);
-            _cur_state = new LogInState(this, graphics, Content);
-            _cur_state.Run();
-            /*List<Character> heroes = new List<Character>();
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Ant_Man(Content));
-            heroes.Add(new Captain_America(Content));
-            heroes.Add(new Captain_America(Content));
-            heroes.Add(new Cable(Content));
-            heroes.Add(new Cable(Content));
-            _cur_state = new BattleState(this, graphics, Content, heroes);
-            _cur_state.Run();*/
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _cur_state = new LogInState(this, graphics.GraphicsDevice, Content);
             //_cur_state.LoadContent();
             // TODO: use this.Content to load your game content here
         }
@@ -97,7 +87,15 @@ namespace Marvel_Avengers_Alliance_REBORN
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             
-            //_cur_state.Update(gameTime);
+            if(_next_state != null)
+            {
+                _cur_state = _next_state;
+                _next_state = null;
+            }
+
+            _cur_state.Update(gameTime);
+
+            _cur_state.PostUpdate(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -109,10 +107,10 @@ namespace Marvel_Avengers_Alliance_REBORN
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
             // TODO: Add your drawing code here
 
-            //_cur_state.Draw(gameTime);
+            _cur_state.Draw(gameTime, spriteBatch);
 
             base.Draw(gameTime);
         }
@@ -124,10 +122,10 @@ namespace Marvel_Avengers_Alliance_REBORN
             graphics.ApplyChanges();
         }
         
-        public void Change_State(MAAGame state)
+        public void Change_State(State state)
         {
-            _cur_state = state;
-            _cur_state.Run();
+            _next_state = state;
+            //_cur_state.Run();
         }
 
         public void Quit()
