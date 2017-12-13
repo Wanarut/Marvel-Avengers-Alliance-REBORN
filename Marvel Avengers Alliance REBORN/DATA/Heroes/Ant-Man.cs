@@ -75,7 +75,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             #endregion
 
             #region Set 4th Attack
-            skill = new Skill("Ant-Man-Swarm_Cloud");
+            skill = new Skill("Ant-Man-Super-Pint-Size_Surprise");
             skill.Set_Time(4);
             skill.Set_Stamina_Cost(5);
             skill.Set_NumberOfTargets(TargetType.One_Enemy);
@@ -172,7 +172,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                         break;
                     }
                     #endregion
-                case "Ant-Man-Swarm_Cloud":
+                case "Ant-Man-Super-Pint-Size_Surprise":
                     #region Skill Motion
                     {
                         #region Skill Motion

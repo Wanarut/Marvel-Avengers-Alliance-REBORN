@@ -181,6 +181,18 @@
 /processorParam:TextureFormat=Color
 /build:Character/Ant-Man/Modern/Ant-Man-Pint-Size_Surprise.png
 
+#begin Character/Ant-Man/Modern/Ant-Man-Super-Pint-Size_Surprise.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Character/Ant-Man/Modern/Ant-Man-Super-Pint-Size_Surprise.png
+
 #begin Character/Ant-Man/Modern/Ant-Man-Swarm_Cloud.png
 /importer:TextureImporter
 /processor:TextureProcessor
