@@ -182,7 +182,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             {
                 case Gadget.Agent_Recharge:
                     {
-                        heroes[cur_turn].Recharge();
+                        heroes[cur_turn] = heroes[cur_turn].Recharge();
                         Change_Turn(BattleState.TWO_PLAYER);
                         break;
                     }
@@ -361,7 +361,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             if (heroes.Count == 3)
             {
-                if (!(BattleState.IsLeft_Side(heroes[0]) ^ BattleState.IsLeft_Side(heroes[1]) ^ BattleState.IsLeft_Side(heroes[2]))) return true;
+                if ((!BattleState.IsLeft_Side(heroes[0]) && !BattleState.IsLeft_Side(heroes[1]) && !BattleState.IsLeft_Side(heroes[2])) || 
+                    (BattleState.IsLeft_Side(heroes[0]) && BattleState.IsLeft_Side(heroes[1]) && BattleState.IsLeft_Side(heroes[2]))) return true;
             }
 
             return false;
@@ -379,7 +380,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 if (avatar.Get_Sprite().Get_IsDead())
                 {
                     heroes.Remove(avatar);
-                    cur_turn--;
+                    //cur_turn--;
                     break;
                 }
 
@@ -389,23 +390,25 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             }
 
             if (Game_Over()) _game.Change_State(new MapState(_game, _graphicsDevice, _content));
-
-            int j = 1;
-            for(int i = cur_turn + 1; i != cur_turn; i++)
+            else
             {
-                i = i % heroes.Count;
-                heroes[i]._small_icon.Position = new Vector2(295 + (j * 30), 6);
-                j++;
-                if (j == heroes.Count) break;
+                int j = 1;
+                for (int i = cur_turn + 1; i != cur_turn; i++)
+                {
+                    i = i % heroes.Count;
+                    heroes[i]._small_icon.Position = new Vector2(295 + (j * 30), 6);
+                    j++;
+                    if (j == heroes.Count) break;
+                }
+
+                //heroes[cur_turn]._small_icon.Position = new Vector2(277, 0);
+
+                foreach (var btnskill in heroes[cur_turn].Get_Skills_Buttons())
+                    btnskill.Update(heroes[cur_turn]);
+
+                foreach (var btn in menu_component)
+                    btn.Update(gameTime);
             }
-
-            //heroes[cur_turn]._small_icon.Position = new Vector2(277, 0);
-
-            foreach (var btnskill in heroes[cur_turn].Get_Skills_Buttons())
-                btnskill.Update(heroes[cur_turn]);
-
-            foreach (var btn in menu_component)
-                btn.Update(gameTime);
 
             //base.Update(gameTime);
         }
