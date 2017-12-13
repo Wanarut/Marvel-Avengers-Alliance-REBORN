@@ -16,6 +16,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected MouseState currentMouse;
         protected MouseState previousMouse;
         protected bool isPointed;
+        protected bool isFocus;
         protected int margin = 5;
         public event EventHandler Click;
         #endregion
@@ -47,10 +48,14 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         {
             var color = Color.DarkGray;
 
-            if (isPointed)
+            if (isPointed||isFocus)
                 color = Color.White;
 
             spriteBatch.Draw(_texture, Rectangle, color);
+        }
+        public void Set_IsFocusIcon(bool logic)
+        {
+            isFocus = logic;
         }
 
         public override void Update(GameTime gameTime)

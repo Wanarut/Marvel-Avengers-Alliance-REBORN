@@ -165,6 +165,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             btnIconDeadpool.Position = new Vector2(Xposition[0], Yposition[0]);
             HeroSelect.Add(btnIconDeadpool);
             btnIconDeadpool.Click += Icon_was_Clicked;
+            btnIconDeadpool.Set_IsFocusIcon(true);
             heroes.Add(new Deadpool(_content));
             heroes[0]._hp_bar = new StatusBar(heroes[0].Get_Name(), heroes[0].Get_Max_Health(), Gadget.HEALTH, _content);
             heroes[0]._hp_bar.Position = new Vector2(10, 200);
@@ -763,11 +764,31 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         private void Card_was_Clicked(object sender, EventArgs e)
         {
             numSelect = numSelect % 3;
+
+            if(numSelect == 0)
+            {
+                HeroSelect[1].Set_IsFocusIcon(true);
+                HeroSelect[0].Set_IsFocusIcon(false);
+                HeroSelect[2].Set_IsFocusIcon(false);
+            }
+            else if(numSelect == 1)
+            {
+                HeroSelect[2].Set_IsFocusIcon(true);
+                HeroSelect[0].Set_IsFocusIcon(false);
+                HeroSelect[1].Set_IsFocusIcon(false);
+
+            }
+            else if(numSelect == 2)
+            {
+                HeroSelect[0].Set_IsFocusIcon(true);
+                HeroSelect[1].Set_IsFocusIcon(false);
+                HeroSelect[2].Set_IsFocusIcon(false);
+            }
             switch (((SelectCard)sender).Get_Name())
             {
                 case IconHeros.Deadpool_Card:
                     {
-                        if (numSelect % 3 == 0)
+                        if (numSelect == 0)
                         {
                             var btnIconDeadpool = new SelectIcon(_content, IconHeros.Deadpool_Icon);
                             btnIconDeadpool.Position = new Vector2(Xposition[0], Yposition[0]);
@@ -776,7 +797,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 1)
+                        else if (numSelect == 1)
                         {
                             var btnIconDeadpool = new SelectIcon(_content, IconHeros.Deadpool_Icon);
                             btnIconDeadpool.Position = new Vector2(Xposition[1], Yposition[1]);
@@ -785,7 +806,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 2)
+                        else if (numSelect == 2)
                         {
                             var btnIconDeadpool = new SelectIcon(_content, IconHeros.Deadpool_Icon);
                             btnIconDeadpool.Position = new Vector2(Xposition[2], Yposition[2]);
@@ -798,7 +819,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                     }
                 case IconHeros.AntMan_Card:
                     {
-                        if (numSelect % 3 == 0)
+                        if (numSelect == 0)
                         {
                             var btnIconAntMan = new SelectIcon(_content, IconHeros.AntMan_Icon);
                             btnIconAntMan.Position = new Vector2(Xposition[0], Yposition[0]);
@@ -807,7 +828,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 1)
+                        else if (numSelect == 1)
                         {
                             var btnIconAntMan = new SelectIcon(_content, IconHeros.AntMan_Icon);
                             btnIconAntMan.Position = new Vector2(Xposition[1], Yposition[1]);
@@ -816,7 +837,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 2)
+                        else if (numSelect == 2)
                         {
                             var btnIconAntMan = new SelectIcon(_content, IconHeros.AntMan_Icon);
                             btnIconAntMan.Position = new Vector2(Xposition[2], Yposition[2]);
@@ -829,7 +850,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                     }
                 case IconHeros.Hulk_Card:
                     {
-                        if (numSelect % 3 == 0)
+                        if (numSelect == 0)
                         {
                             var btnIconHulk = new SelectIcon(_content, IconHeros.Hulk_Icon);
                             btnIconHulk.Position = new Vector2(Xposition[0], Yposition[0]);
@@ -838,7 +859,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 1)
+                        else if (numSelect == 1)
                         {
                             var btnIconHulk = new SelectIcon(_content, IconHeros.Hulk_Icon);
                             btnIconHulk.Position = new Vector2(Xposition[1], Yposition[1]);
@@ -847,7 +868,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 2)
+                        else if (numSelect == 2)
                         {
                             var btnIconHulk = new SelectIcon(_content, IconHeros.Hulk_Icon);
                             btnIconHulk.Position = new Vector2(Xposition[2], Yposition[2]);
@@ -860,7 +881,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                     }
                 case IconHeros.Captain_Card:
                     {
-                        if (numSelect % 3 == 0)
+                        if (numSelect == 0)
                         {
                             var btnIconCaptain = new SelectIcon(_content, IconHeros.Captain_Icon);
                             btnIconCaptain.Position = new Vector2(Xposition[0], Yposition[0]);
@@ -869,7 +890,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 1)
+                        else if (numSelect == 1)
                         {
                             var btnIconCaptain = new SelectIcon(_content, IconHeros.Captain_Icon);
                             btnIconCaptain.Position = new Vector2(Xposition[1], Yposition[1]);
@@ -878,7 +899,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 2)
+                        else if (numSelect == 2)
                         {
                             var btnIconCaptain = new SelectIcon(_content, IconHeros.Captain_Icon);
                             btnIconCaptain.Position = new Vector2(Xposition[2], Yposition[2]);
@@ -891,7 +912,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                     }
                 case IconHeros.X23_Card:
                     {
-                        if (numSelect % 3 == 0)
+                        if (numSelect == 0)
                         {
                             var btnIconX23 = new SelectIcon(_content, IconHeros.X23_Icon);
                             btnIconX23.Position = new Vector2(Xposition[0], Yposition[0]);
@@ -900,7 +921,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 1)
+                        else if (numSelect == 1)
                         {
                             var btnIconX23 = new SelectIcon(_content, IconHeros.X23_Icon);
                             btnIconX23.Position = new Vector2(Xposition[1], Yposition[1]);
@@ -909,7 +930,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 2)
+                        else if (numSelect == 2)
                         {
                             var btnIconX23 = new SelectIcon(_content, IconHeros.X23_Icon);
                             btnIconX23.Position = new Vector2(Xposition[2], Yposition[2]);
@@ -922,7 +943,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                     }
                 case IconHeros.Cable_Card:
                     {
-                        if (numSelect % 3 == 0)
+                        if (numSelect == 0)
                         {
                             var btnIconCable = new SelectIcon(_content, IconHeros.Cable_Icon);
                             btnIconCable.Position = new Vector2(Xposition[0], Yposition[0]);
@@ -931,7 +952,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 1)
+                        else if (numSelect == 1)
                         {
                             var btnIconCable = new SelectIcon(_content, IconHeros.Cable_Icon);
                             btnIconCable.Position = new Vector2(Xposition[1], Yposition[1]);
@@ -940,7 +961,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                             numSelect++;
                             break;
                         }
-                        else if (numSelect % 3 == 2)
+                        else if (numSelect == 2)
                         {
                             var btnIconCable = new SelectIcon(_content, IconHeros.Cable_Icon);
                             btnIconCable.Position = new Vector2(Xposition[2], Yposition[2]);
