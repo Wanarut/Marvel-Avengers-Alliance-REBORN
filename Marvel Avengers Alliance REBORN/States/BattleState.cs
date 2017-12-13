@@ -182,6 +182,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             {
                 case Gadget.Agent_Recharge:
                     {
+                        heroes[cur_turn].Recharge();
                         Change_Turn(BattleState.TWO_PLAYER);
                         break;
                     }

@@ -97,30 +97,76 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                 case "Ant-Man-Break_In":
                     #region Skill Motion
                     {
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
 
+                        _sprite.Transition(_sprite.Position, goal, 11, 5);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 35)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        _sprite.Transition(goal, _sprite.Position, 35, 5);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 15) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
                 case "Ant-Man-Greatest_Allies":
                     #region Skill Motion
                     {
-                        
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 35)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 25) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
                 case "Ant-Man-Pint-Size_Surprise":
                     #region Skill Motion
                     {
-                        Vector2 goal;
-                        if (BattleState.IsLeft_Side(this)) goal = new Vector2(_sprite.Get_Targets()[0].Position.X - (_sprite.Get_Targets()[0].Get_Sprite_Width() / 1.2f), _sprite.Get_Targets()[0].Position.Y + 0.01f);
-                        else goal = new Vector2(_sprite.Get_Targets()[0].Position.X + (_sprite.Get_Targets()[0].Get_Sprite_Width() / 1.2f), _sprite.Get_Targets()[0].Position.Y + 0.01f);
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
 
                         _sprite.Transition(_sprite.Position, goal, 11, 5);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 36)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
 
                         _sprite.Transition(goal, _sprite.Position, 35, 5);
 
-                        if (_sprite.Get_Cur_Frame() == 17) _sprite.Set_isHealth_Calculated(true);
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 26) _sprite.Set_isHealth_Calculated(true);
                         else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
                         if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
                         else _sprite.Set_isStamina_Calculated(false);
                         break;
@@ -129,7 +175,46 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                 case "Ant-Man-Swarm_Cloud":
                     #region Skill Motion
                     {
-                        
+                        #region Skill Motion
+                        {
+                            //for melee skill
+                            if (_sprite.Get_Cur_Frame() == 10)
+                            {
+                                if (BattleState.IsLeft_Side(this)) goal = new Vector2(_sprite.Position.X - 300, _sprite.Position.Y - 300);
+                                else goal = new Vector2(_sprite.Position.X + 300, _sprite.Position.Y - 300);
+                            }
+
+                            _sprite.Transition(_sprite.Position, goal, 10, 10);
+
+                            if (_sprite.Get_Cur_Frame() == 23) _sprite._cur_position = Set_Melee_Goal(_sprite.Get_Targets()[0]);
+
+                            //When Hit
+                            if (_sprite.Get_Cur_Frame() == 36)
+                            {
+                                foreach (var target in _sprite.Get_Targets())
+                                {
+                                    target.Re_Main();
+                                }
+                            }
+
+                            if (_sprite.Get_Cur_Frame() == 47)
+                            {
+                                goal = new Vector2(_sprite.Position.X, _sprite.Position.Y - 500);
+                                _sprite._cur_position = goal;
+                            }
+
+                            _sprite.Transition(goal, _sprite.Position, 47, 8);
+
+                            //Set Hit
+                            if (_sprite.Get_Cur_Frame() == 30) _sprite.Set_isHealth_Calculated(true);
+                            else _sprite.Set_isHealth_Calculated(false);
+
+                            //Use Stamina
+                            if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                            else _sprite.Set_isStamina_Calculated(false);
+                            break;
+                        }
+                        #endregion
                         break;
                     }
                     #endregion
@@ -158,12 +243,14 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
 
         protected override Vector2 Set_Melee_Goal(Sprite target)
         {
-            throw new NotImplementedException();
+            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X - 200, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width - 120, target.Position.Y + 0.01f);
         }
 
         protected override Vector2 Set_Range_Goal(Sprite target)
         {
-            throw new NotImplementedException();
+            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X - 370, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width + 50, target.Position.Y + 0.01f);
         }
     }
 }
