@@ -32,6 +32,11 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
             return _skill;
         }
 
+        public bool Get_EnoughStamina()
+        {
+            return isEnoughStamina;
+        }
+
         public void Decrease_CoolDown()
         {
             _skill.Get_Cooldown()[0]--;

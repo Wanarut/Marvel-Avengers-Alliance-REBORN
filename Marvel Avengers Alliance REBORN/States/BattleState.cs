@@ -162,15 +162,40 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 btnskill.Decrease_CoolDown();
 
             heroes[cur_turn].Set_Sprite_Focus(false);
-            if(num_player == 1)
+
+            cur_turn++;
+            cur_turn = cur_turn % heroes.Count;
+
+            if (num_player == 1 && !BattleState.IsLeft_Side(heroes[cur_turn]))
             {
-                cur_turn += 2;
+                //cur_turn += 2;
+                //create bot
+
+                if (!heroes[cur_turn].Get_Skills_Buttons()[0].Get_EnoughStamina() && !heroes[cur_turn].Get_Skills_Buttons()[1].Get_EnoughStamina() && 
+                    !heroes[cur_turn].Get_Skills_Buttons()[2].Get_EnoughStamina() && !heroes[cur_turn].Get_Skills_Buttons()[3].Get_EnoughStamina())
+                {
+                    heroes[cur_turn].Recharge();
+                    Change_Turn();
+                }
+                else
+                {
+                    Random rand = new Random();
+                    SkillButton cur_skill;
+                    int i;
+                    do
+                    {
+                        i = rand.Next(0, 4);
+                        cur_skill = heroes[cur_turn].Get_Skills_Buttons()[i];
+                    } while (!cur_skill.Get_EnoughStamina() || cur_skill.Get_Skill().Get_Cooldown()[0] > 0);
+                    heroes[cur_turn].Set_Cur_Skill_Btn(cur_skill);
+                    Console.Out.WriteLine("Skill " + (cur_skill.Get_Skill().Get_Name() + " of " + heroes[cur_turn].Get_Name() + " BOT was Selected"));
+                }
             }
             else
             {
-                cur_turn++;
+                //cur_turn++;
             }
-            cur_turn = cur_turn % heroes.Count;
+            //cur_turn = cur_turn % heroes.Count;
             heroes[cur_turn].Set_Sprite_Focus(true);
 
             heroes[cur_turn]._small_icon.Position = new Vector2(277, 0);
@@ -182,8 +207,9 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             {
                 case Gadget.Agent_Recharge:
                     {
-                        heroes[cur_turn] = heroes[cur_turn].Recharge();
-                        Change_Turn(BattleState.TWO_PLAYER);
+                        heroes[cur_turn].Recharge();
+                        //Change_Turn(BattleState.TWO_PLAYER);
+                        Change_Turn();
                         break;
                     }
                 case Gadget.Arc_Reactor_Charge:
