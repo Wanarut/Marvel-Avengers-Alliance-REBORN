@@ -1,5 +1,6 @@
 ﻿using Marvel_Avengers_Alliance_REBORN.Buttons;
 using Marvel_Avengers_Alliance_REBORN.Models;
+using Marvel_Avengers_Alliance_REBORN.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
@@ -96,31 +97,99 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                 case "Captain_America-Shield_Bash":
                     #region Skill Motion
                     {
-                        
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
+
+                        _sprite.Transition(_sprite.Position, goal, 11, 5);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 25)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        _sprite.Transition(goal, _sprite.Position, 25, 4);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 16) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
                 case "Captain_America-Leading_Strike":
                     #region Skill Motion
                     {
-                        
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
+
+                        _sprite.Transition(_sprite.Position, goal, 9, 5);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 25)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        _sprite.Transition(goal, _sprite.Position, 23, 5);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 15) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
                 case "Captain_America-Shield_Throw":
                     #region Skill Motion
                     {
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
+
+                        //_sprite.Transition(_sprite.Position, goal, 9, 5);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 25)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        //_sprite.Transition(goal, _sprite.Position, 23, 5);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 19) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
                 case "Captain_America-Shield_Guard":
                     #region Skill Motion
                     {
-                        
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
+
                     #endregion
             }
+
+
         }
         #endregion
 
@@ -135,12 +204,14 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
 
         protected override Vector2 Set_Melee_Goal(Sprite target)
         {
-            throw new NotImplementedException();
+            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X - 180, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width -100, target.Position.Y + 0.01f);
         }
 
         protected override Vector2 Set_Range_Goal(Sprite target)
         {
-            throw new NotImplementedException();
+            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X - 380, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width + 50, target.Position.Y + 0.01f);
         }
     }
 }

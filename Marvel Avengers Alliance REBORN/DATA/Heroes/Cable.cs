@@ -120,12 +120,25 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                     {
                         //for range skill
                         if (_sprite.Get_Cur_Frame() == 8)
-                            if(_sprite.Get_Targets()[1] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[1]);
+                        {
+                            if (_sprite.Get_Targets().Count > 1 && _sprite.Get_Targets()[1] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[1]);
+                            else if (_sprite.Get_Targets().Count > 1 && _sprite.Get_Targets()[2] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[2]);
+                            else _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[0]);
+                        }
 
-                        if (_sprite.Get_Cur_Frame() == 18) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[0]);
+                        if (_sprite.Get_Cur_Frame() == 18)
+                        {
+                            if (_sprite.Get_Targets()[0] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[0]);
+                            else if (_sprite.Get_Targets()[2] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[2]);
+                            else _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[1]);
+                        }
 
                         if (_sprite.Get_Cur_Frame() == 25)
-                            if (_sprite.Get_Targets()[2] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[2]);
+                        {
+                            if (_sprite.Get_Targets().Count > 2 && _sprite.Get_Targets()[2] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[2]);
+                            else if (_sprite.Get_Targets().Count > 2 && _sprite.Get_Targets()[1] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[1]);
+                            else _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[0]);
+                        }
                         //When Hit
                         if (_sprite.Get_Cur_Frame() == 36)
                         {

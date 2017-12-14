@@ -75,13 +75,17 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             Icon_map.Add(button_map5);
             button_map5.Click += Menu_was_Clicked;
         }
-
         private void Menu_was_Clicked(object sender, EventArgs e)
         {
+            LogInState.numstage = LogInState.numstage % 6;
             switch (((IconMap)sender).Get_Name())
             {
                 case MapButton.MB_000:
                     {
+                        if(LogInState.numstage != 0)
+                        {
+                            break;
+                        }
                         enemieslist.Clear();
                         enemies.Clear();
                         var NextBar =new IconMap(_content, MapButton.IC_007);
@@ -91,22 +95,26 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                         var IconBar = new IconMap(_content, MapButton.IC_000);
                         IconBar.Position = new Vector2(205, 600 - IconBar.Get_Height());
                         enemieslist.Add(IconBar);
+                        var Deadpool = new IconMap(_content, MapButton.IC_003);
+                        Deadpool.Position = new Vector2((map_background.Get_Width() / 2) - (Deadpool.Get_Width() / 2), 600-Deadpool.Get_Height());
+                        enemieslist.Add(Deadpool);
                         var Ant = new IconMap(_content, MapButton.IC_001);
-                        Ant.Position = new Vector2((map_background.Get_Width() / 2) - (Ant.Get_Width() / 2), 600-Ant.Get_Height());
+                        Ant.Position = new Vector2((map_background.Get_Width() / 2) - ((Ant.Get_Width() / 2)*(7/2)+10), 600 - Ant.Get_Height());
                         enemieslist.Add(Ant);
-                        var Ant1 = new IconMap(_content, MapButton.IC_001);
-                        Ant1.Position = new Vector2((map_background.Get_Width() / 2) - ((Ant1.Get_Width() / 2)*(7/2)+10), 600 - Ant1.Get_Height());
-                        enemieslist.Add(Ant1);
-                        var Ant2 = new IconMap(_content, MapButton.IC_001);
-                        Ant2.Position = new Vector2((map_background.Get_Width() / 2) + ((Ant2.Get_Width() / 2)+10), 600 - Ant2.Get_Height());
-                        enemieslist.Add(Ant2);
+                        var Captain = new IconMap(_content, MapButton.IC_002);
+                        Captain.Position = new Vector2((map_background.Get_Width() / 2) + ((Captain.Get_Width() / 2)+10), 600 - Captain.Get_Height());
+                        enemieslist.Add(Captain);
+                        enemies.Add(new Deadpool(_content));
                         enemies.Add(new Ant_Man(_content));
-                        enemies.Add(new Ant_Man(_content));
-                        enemies.Add(new Ant_Man(_content));
+                        enemies.Add(new Captain_America(_content));
                         break;
                     }
                 case MapButton.MB_001:
                     {
+                        if (LogInState.numstage != 1)
+                        {
+                            break;
+                        }
                         enemieslist.Clear();
                         enemies.Clear();
                         var NextBar = new IconMap(_content, MapButton.IC_007);
@@ -116,24 +124,28 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                         var IconBar = new IconMap(_content, MapButton.IC_000);
                         IconBar.Position = new Vector2(205, 600 - IconBar.Get_Height());
                         enemieslist.Add(IconBar);
-                        var Ant = new IconMap(_content, MapButton.IC_002);
-                        Ant.Position = new Vector2((map_background.Get_Width() / 2) - (Ant.Get_Width() / 2), 600 - Ant.Get_Height());
-                        enemieslist.Add(Ant);
+                        var Hulk = new IconMap(_content, MapButton.IC_005);
+                        Hulk.Position = new Vector2((map_background.Get_Width() / 2) - (Hulk.Get_Width() / 2), 600 - Hulk.Get_Height());
+                        enemieslist.Add(Hulk);
                         var Ant1 = new IconMap(_content, MapButton.IC_002);
                         Ant1.Position = new Vector2((map_background.Get_Width() / 2) - ((Ant1.Get_Width() / 2) * (7 / 2) + 10), 600 - Ant1.Get_Height());
                         enemieslist.Add(Ant1);
-                        var Ant2 = new IconMap(_content, MapButton.IC_002);
-                        Ant2.Position = new Vector2((map_background.Get_Width() / 2) + ((Ant2.Get_Width() / 2) + 10), 600 - Ant2.Get_Height());
-                        enemieslist.Add(Ant2);
+                        var Deadpool = new IconMap(_content, MapButton.IC_003);
+                        Deadpool.Position = new Vector2((map_background.Get_Width() / 2) + ((Deadpool.Get_Width() / 2) + 10), 600 - Deadpool.Get_Height());
+                        enemieslist.Add(Deadpool);
+                        enemies.Add(new Hulk(_content));
                         enemies.Add(new Captain_America(_content));
-                        enemies.Add(new Captain_America(_content));
-                        enemies.Add(new Captain_America(_content));
+                        enemies.Add(new Deadpool(_content));
 
 
                         break;
                     }
                 case MapButton.MB_002:
                     {
+                        if (LogInState.numstage != 2)
+                        {
+                            break;
+                        }
                         enemieslist.Clear();
                         enemies.Clear();
                         var NextBar = new IconMap(_content, MapButton.IC_007);
@@ -143,23 +155,27 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                         var IconBar = new IconMap(_content, MapButton.IC_000);
                         IconBar.Position = new Vector2(205, 600 - IconBar.Get_Height());
                         enemieslist.Add(IconBar);
-                        var Ant = new IconMap(_content, MapButton.IC_003);
+                        var Ant = new IconMap(_content, MapButton.IC_001);
                         Ant.Position = new Vector2((map_background.Get_Width() / 2) - (Ant.Get_Width() / 2), 600 - Ant.Get_Height());
                         enemieslist.Add(Ant);
-                        var Ant1 = new IconMap(_content, MapButton.IC_003);
-                        Ant1.Position = new Vector2((map_background.Get_Width() / 2) - ((Ant1.Get_Width() / 2) * (7 / 2) + 10), 600 - Ant1.Get_Height());
-                        enemieslist.Add(Ant1);
-                        var Ant2 = new IconMap(_content, MapButton.IC_003);
-                        Ant2.Position = new Vector2((map_background.Get_Width() / 2) + ((Ant2.Get_Width() / 2) + 10), 600 - Ant2.Get_Height());
-                        enemieslist.Add(Ant2);
+                        var Deadpool = new IconMap(_content, MapButton.IC_003);
+                        Deadpool.Position = new Vector2((map_background.Get_Width() / 2) - ((Deadpool.Get_Width() / 2) * (7 / 2) + 10), 600 - Deadpool.Get_Height());
+                        enemieslist.Add(Deadpool);
+                        var Cable = new IconMap(_content, MapButton.IC_004);
+                        Cable.Position = new Vector2((map_background.Get_Width() / 2) + ((Cable.Get_Width() / 2) + 10), 600 - Cable.Get_Height());
+                        enemieslist.Add(Cable);
+                        enemies.Add(new Ant_Man(_content));
                         enemies.Add(new Deadpool(_content));
-                        enemies.Add(new Deadpool(_content));
-                        enemies.Add(new Deadpool(_content));
+                        enemies.Add(new Cable(_content));
 
                         break;
                     }
                 case MapButton.MB_003:
                     {
+                        if (LogInState.numstage != 3)
+                        {
+                            break;
+                        }
                         enemieslist.Clear();
                         enemies.Clear();
                         var NextBar = new IconMap(_content, MapButton.IC_007);
@@ -169,23 +185,27 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                         var IconBar = new IconMap(_content, MapButton.IC_000);
                         IconBar.Position = new Vector2(205, 600 - IconBar.Get_Height());
                         enemieslist.Add(IconBar);
-                        var Ant = new IconMap(_content, MapButton.IC_005);
-                        Ant.Position = new Vector2((map_background.Get_Width() / 2) - (Ant.Get_Width() / 2), 600 - Ant.Get_Height());
-                        enemieslist.Add(Ant);
-                        var Ant1 = new IconMap(_content, MapButton.IC_005);
-                        Ant1.Position = new Vector2((map_background.Get_Width() / 2) - ((Ant1.Get_Width() / 2) * (7 / 2) + 10), 600 - Ant1.Get_Height());
-                        enemieslist.Add(Ant1);
-                        var Ant2 = new IconMap(_content, MapButton.IC_005);
-                        Ant2.Position = new Vector2((map_background.Get_Width() / 2) + ((Ant2.Get_Width() / 2) + 10), 600 - Ant2.Get_Height());
-                        enemieslist.Add(Ant2);
+                        var X_23 = new IconMap(_content, MapButton.IC_006);
+                        X_23.Position = new Vector2((map_background.Get_Width() / 2) - (X_23.Get_Width() / 2), 600 - X_23.Get_Height());
+                        enemieslist.Add(X_23);
+                        var Hulk = new IconMap(_content, MapButton.IC_005);
+                        Hulk.Position = new Vector2((map_background.Get_Width() / 2) - ((Hulk.Get_Width() / 2) * (7 / 2) + 10), 600 - Hulk.Get_Height());
+                        enemieslist.Add(Hulk);
+                        var Captain_America = new IconMap(_content, MapButton.IC_002);
+                        Captain_America.Position = new Vector2((map_background.Get_Width() / 2) + ((Captain_America.Get_Width() / 2) + 10), 600 - Captain_America.Get_Height());
+                        enemieslist.Add(Captain_America);
+                        enemies.Add(new X_23(_content));
                         enemies.Add(new Hulk(_content));
-                        enemies.Add(new Hulk(_content));
-                        enemies.Add(new Hulk(_content));
+                        enemies.Add(new Captain_America(_content));
 
                         break;
                     }
                 case MapButton.MB_004:
                     {
+                        if (LogInState.numstage != 4)
+                        {
+                            break;
+                        }
                         enemieslist.Clear();
                         enemies.Clear();
                         var NextBar = new IconMap(_content, MapButton.IC_007);
@@ -195,22 +215,26 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                         var IconBar = new IconMap(_content, MapButton.IC_000);
                         IconBar.Position = new Vector2(205, 600 - IconBar.Get_Height());
                         enemieslist.Add(IconBar);
-                        var Ant = new IconMap(_content, MapButton.IC_004);
-                        Ant.Position = new Vector2((map_background.Get_Width() / 2) - (Ant.Get_Width() / 2), 600 - Ant.Get_Height());
-                        enemieslist.Add(Ant);
-                        var Ant1 = new IconMap(_content, MapButton.IC_004);
-                        Ant1.Position = new Vector2((map_background.Get_Width() / 2) - ((Ant1.Get_Width() / 2) * (7 / 2) + 10), 600 - Ant1.Get_Height());
-                        enemieslist.Add(Ant1);
-                        var Ant2 = new IconMap(_content, MapButton.IC_004);
-                        Ant2.Position = new Vector2((map_background.Get_Width() / 2) + ((Ant2.Get_Width() / 2) + 10), 600 - Ant2.Get_Height());
-                        enemieslist.Add(Ant2);
+                        var Hulk = new IconMap(_content, MapButton.IC_005);
+                        Hulk.Position = new Vector2((map_background.Get_Width() / 2) - (Hulk.Get_Width() / 2), 600 - Hulk.Get_Height());
+                        enemieslist.Add(Hulk);
+                        var Cable = new IconMap(_content, MapButton.IC_004);
+                        Cable.Position = new Vector2((map_background.Get_Width() / 2) - ((Cable.Get_Width() / 2) * (7 / 2) + 10), 600 - Cable.Get_Height());
+                        enemieslist.Add(Cable);
+                        var Deadpool = new IconMap(_content, MapButton.IC_003);
+                        Deadpool.Position = new Vector2((map_background.Get_Width() / 2) + ((Deadpool.Get_Width() / 2) + 10), 600 - Deadpool.Get_Height());
+                        enemieslist.Add(Deadpool);
+                        enemies.Add(new Hulk(_content));
                         enemies.Add(new Cable(_content));
-                        enemies.Add(new Cable(_content));
-                        enemies.Add(new Cable(_content));
+                        enemies.Add(new Deadpool(_content));
                         break;
                     }
                 case MapButton.MB_005:
                     {
+                        if (LogInState.numstage != 5)
+                        {
+                            break;
+                        }
                         enemieslist.Clear();
                         enemies.Clear();
                         var NextBar = new IconMap(_content, MapButton.IC_007);
@@ -220,24 +244,25 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                         var IconBar = new IconMap(_content, MapButton.IC_000);
                         IconBar.Position = new Vector2(205, 600 - IconBar.Get_Height());
                         enemieslist.Add(IconBar);
-                        var Ant = new IconMap(_content, MapButton.IC_006);
+                        var Ant = new IconMap(_content, MapButton.IC_001);
                         Ant.Position = new Vector2((map_background.Get_Width() / 2) - (Ant.Get_Width() / 2), 600 - Ant.Get_Height());
                         enemieslist.Add(Ant);
-                        var Ant1 = new IconMap(_content, MapButton.IC_006);
-                        Ant1.Position = new Vector2((map_background.Get_Width() / 2) - ((Ant1.Get_Width() / 2) * (7 / 2) + 10), 600 - Ant1.Get_Height());
-                        enemieslist.Add(Ant1);
-                        var Ant2 = new IconMap(_content, MapButton.IC_006);
-                        Ant2.Position = new Vector2((map_background.Get_Width() / 2) + ((Ant2.Get_Width() / 2) + 10), 600 - Ant2.Get_Height());
-                        enemieslist.Add(Ant2);
+                        var X_23 = new IconMap(_content, MapButton.IC_006);
+                        X_23.Position = new Vector2((map_background.Get_Width() / 2) - ((X_23.Get_Width() / 2) * (7 / 2) + 10), 600 - X_23.Get_Height());
+                        enemieslist.Add(X_23);
+                        var Captain_America = new IconMap(_content, MapButton.IC_002);
+                        Captain_America.Position = new Vector2((map_background.Get_Width() / 2) + ((Captain_America.Get_Width() / 2) + 10), 600 - Captain_America.Get_Height());
+                        enemieslist.Add(Captain_America);
+                        enemies.Add(new Ant_Man(_content));
                         enemies.Add(new X_23(_content));
-                        enemies.Add(new X_23(_content));
-                        enemies.Add(new X_23(_content));
+                        enemies.Add(new Captain_America(_content));
 
                         break;
                     }
                 case MapButton.IC_007:
                     {
                         _game.Change_State(new SelectState(_game, _graphicsDevice, _content, enemies));
+                        LogInState.numstage++;
                         break;
                     }
             }
@@ -245,6 +270,27 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
         public override void Update(GameTime gameTime)
         {
+            switch (LogInState.numstage)
+            {
+                case 0:
+                    button_map0.Set_IsFocusIcon(true);
+                    break;
+                case 1:
+                    button_map1.Set_IsFocusIcon(true);
+                    break;
+                case 2:
+                    button_map2.Set_IsFocusIcon(true);
+                    break;
+                case 3:
+                    button_map3.Set_IsFocusIcon(true);
+                    break;
+                case 4:
+                    button_map4.Set_IsFocusIcon(true);
+                    break;
+                case 5:
+                    button_map5.Set_IsFocusIcon(true);
+                    break;
+            }
 
             foreach (var btn in Icon_map)
             {

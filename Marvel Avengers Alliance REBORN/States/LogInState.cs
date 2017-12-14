@@ -19,6 +19,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 {
     class LogInState : State
     {
+        static public int numstage = 0;
         private List<Component> _menucomponent;
         private Background _background;
         private Textbox textbox;

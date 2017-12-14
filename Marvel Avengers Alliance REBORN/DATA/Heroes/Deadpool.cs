@@ -1,5 +1,6 @@
 ﻿using Marvel_Avengers_Alliance_REBORN.Buttons;
 using Marvel_Avengers_Alliance_REBORN.Models;
+using Marvel_Avengers_Alliance_REBORN.States;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
@@ -93,30 +94,115 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         {
             switch (_cur_skill_btn.Get_Skill().Get_Name())
             {
-                case "Captain_America-Shield_Bash":
+                case "Deadpool-Sharp_Pointy_Things":
                     #region Skill Motion
                     {
-                        
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
+
+                        _sprite.Transition(_sprite.Position, goal, 10, 5);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 20)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        _sprite.Transition(goal, _sprite.Position, 29, 5);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 14) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
-                case "Captain_America-Leading_Strike":
+                case "Deadpool-Bang_Bang_Bang!":
                     #region Skill Motion
                     {
-                        
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
+
+                        _sprite.Transition(_sprite.Position, goal, 7, 5);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 76)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        _sprite.Transition(goal, _sprite.Position, 76, 5);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 12) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
-                case "Captain_America-Shield_Throw":
+                case "Deadpool-No_Holds_Barred":
                     #region Skill Motion
                     {
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
+
+                        _sprite.Transition(_sprite.Position, goal, 8, 5);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 35)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        _sprite.Transition(goal, _sprite.Position, 35, 5);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 16) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
-                case "Captain_America-Shield_Guard":
+                case "Deadpool-Happy_to_See_You":
                     #region Skill Motion
                     {
-                        
+                        //for melee skill
+                        goal = Set_Range_Goal(_sprite.Get_Targets()[0]);
+
+                        _sprite.Transition(_sprite.Position, goal, 5, 5);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 37)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        _sprite.Transition(goal, _sprite.Position, 39, 4);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 9) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
@@ -145,12 +231,14 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
 
         protected override Vector2 Set_Melee_Goal(Sprite target)
         {
-            throw new NotImplementedException();
+            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X - 260, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width - 240, target.Position.Y + 0.01f);
         }
 
         protected override Vector2 Set_Range_Goal(Sprite target)
         {
-            throw new NotImplementedException();
+            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X - 380, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width + 50, target.Position.Y + 0.01f);
         }
     }
 }

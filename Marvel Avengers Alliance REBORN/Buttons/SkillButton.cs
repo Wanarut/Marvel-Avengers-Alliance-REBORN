@@ -56,11 +56,14 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
 
         public void Update(Character hero)
         {
-            if (hero.Get_Stamina() >= (_skill.Get_StaminaCost() * hero.Get_Max_Stamina() / 100)) isEnoughStamina = true;
+            if (hero.Get_Stamina() >= (_skill.Get_StaminaCost() * hero.Get_Max_Stamina() / 100))
+            {
+                isEnoughStamina = true;
+            }
             else
             {
                 isEnoughStamina = false;
-                return;
+                //return;
             }
 
             previousMouse = currentMouse;

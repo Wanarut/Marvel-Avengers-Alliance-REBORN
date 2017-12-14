@@ -25,5 +25,11 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
             return IconMap_name;
         }
 
+        public void Set_IsFocusIcon(bool logic)
+        {
+            isFocus = logic;
+            isPointed = logic;
+        }
+
     }
 }

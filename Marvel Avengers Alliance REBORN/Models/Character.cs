@@ -256,8 +256,9 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
         public void Recharge()
         {
-            _cur_stamina += (int)(_max_stamina * 0.25f);
+            _cur_stamina = _cur_stamina + (int)(_max_stamina * 0.15f);
             if (_cur_stamina > _max_stamina) _cur_stamina = _max_stamina;
+            _sprite.Get_Char().Set_Stamina(_cur_stamina);
         }
         #endregion
     }

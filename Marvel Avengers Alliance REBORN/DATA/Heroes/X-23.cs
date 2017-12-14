@@ -94,37 +94,139 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         {
             switch (_cur_skill_btn.Get_Skill().Get_Name())
             {
-                case "Captain_America-Shield_Bash":
+                case "X-23-Snikt!":
                     #region Skill Motion
                     {
-                        
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
+
+                        _sprite.Transition(_sprite.Position, goal, 5, 9);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 21)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        _sprite.Transition(goal, _sprite.Position, 21, 6);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 10) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
-                    #endregion
-                case "Captain_America-Leading_Strike":
+                #endregion
+                case "X-23-Blades_of_Rage":
                     #region Skill Motion
                     {
-                        
+                        //for range skill
+                        if (_sprite.Get_Cur_Frame() == 5)
+                        {
+                            if (_sprite.Get_Targets().Count > 1 && _sprite.Get_Targets()[1] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[1]);
+                            else if (_sprite.Get_Targets().Count > 1 && _sprite.Get_Targets()[2] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[2]);
+                            else _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[0]);
+                        }
+
+                        if (_sprite.Get_Cur_Frame() == 14)
+                        {
+                            if (_sprite.Get_Targets()[0] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[0]);
+                            else if (_sprite.Get_Targets()[2] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[2]);
+                            else _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[1]);
+                        }
+
+                        if (_sprite.Get_Cur_Frame() == 10)
+                        {
+                            if (_sprite.Get_Targets().Count > 2 && _sprite.Get_Targets()[2] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[2]);
+                            else if (_sprite.Get_Targets().Count > 2 && _sprite.Get_Targets()[1] != null) _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[1]);
+                            else _sprite._cur_position = Set_Range_Goal(_sprite.Get_Targets()[0]);
+                        }
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 22)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        //if (_sprite.Get_Cur_Frame() == 36) _sprite._cur_position = _sprite.Position;
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 10) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
-                    #endregion
-                case "Captain_America-Shield_Throw":
+                #endregion
+                case "X-23-Made_For_Walking":
                     #region Skill Motion
                     {
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
+
+                        _sprite.Transition(_sprite.Position, goal, 3, 4);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 18)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        _sprite.Transition(goal, _sprite.Position, 22, 5);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 7) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
-                    #endregion
-                case "Captain_America-Shield_Guard":
+                #endregion
+                case "X-23-Assassin's_Strike":
                     #region Skill Motion
                     {
-                        
+                        //for melee skill
+                        goal = Set_Melee_Goal(_sprite.Get_Targets()[0]);
+
+                        _sprite.Transition(_sprite.Position, goal, 5, 7);
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 20)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        _sprite.Transition(goal, _sprite.Position, 19, 7);
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 12) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
             }
         }
         #endregion
-
+        
         public override void Set_Sprite_Position(Vector2 vector)
         {
             _sprite.Position = vector;
@@ -146,12 +248,15 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
 
         protected override Vector2 Set_Melee_Goal(Sprite target)
         {
-            throw new NotImplementedException();
+            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X - 200, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width - 80, target.Position.Y + 0.01f);
         }
 
         protected override Vector2 Set_Range_Goal(Sprite target)
         {
-            throw new NotImplementedException();
+            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X - 200, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width - 50, target.Position.Y + 0.01f);
         }
+
     }
 }

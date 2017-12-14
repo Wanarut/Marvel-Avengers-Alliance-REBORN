@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Marvel_Avengers_Alliance_REBORN.States;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -54,11 +55,12 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected bool isDead;
         protected bool hasTarget;
         protected bool wasAttacked;
-        protected bool isReachTarget;
+        protected bool isAttackFinish;
         protected bool isHealthCalculated;
         protected bool isStaminaCalculated;
         protected List<Sprite> _targets;
         protected Character _mychar;
+        public BattleState battle_stage;
         #endregion
 
         protected Rectangle Rectangle;
@@ -320,6 +322,15 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                 if (hasTarget && _cur_frame == _frame_per_sec * _time_cast)
                 {
                     ChangeTexture(_main_texture, 15, 4);
+                    isAttackFinish = true;
+                    if(battle_stage.heroes[battle_stage.cur_turn].Get_Cur_Skill_Btn() != null) battle_stage.heroes[battle_stage.cur_turn].Get_Cur_Skill_Btn().Re_CoolDown();
+                    battle_stage.cur_turn++;
+                    battle_stage.cur_turn %= battle_stage.heroes.Count;
+                    battle_stage.heroes[battle_stage.cur_turn]._small_icon.Position = new Vector2(277, 0);
+                    battle_stage.heroes[battle_stage.cur_turn].Set_Sprite_Focus(true);
+                    //if(BattleState.IsLeft_Side(battle_stage.heroes[battle_stage.cur_turn])) battle_stage.Change_Turn();
+                    battle_stage.Change_Turn();
+
                     /*foreach (var target in _targets)
                     {
                         target.ChangeTexture(target._main_texture, 15, 4);
@@ -328,6 +339,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                     _targets = new List<Sprite>();
                     isFocus = false;
                 }
+                else isAttackFinish = false;
                 // Keep the Frame between 0 and the total frames, minus one.
                 _cur_column = _cur_column % _frame_per_sec;
                 _cur_row = _cur_row % _time_cast;

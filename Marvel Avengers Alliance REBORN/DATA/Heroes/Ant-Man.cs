@@ -77,13 +77,13 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
             #region Set 4th Attack
             skill = new Skill("Ant-Man-Super-Pint-Size_Surprise");
             skill.Set_Time(4);
-            skill.Set_Stamina_Cost(5);
-            skill.Set_NumberOfTargets(TargetType.One_Enemy);
+            skill.Set_Stamina_Cost(23);
+            skill.Set_NumberOfTargets(TargetType.All_Enemies);
             skill.Set_Damage(510, 612);
             skill.Set_Cooldown(1, 1);
             skill.Set_NumberOfHits(1);
             skill.Set_Hits_Chance(100);
-            skill.Set_Cri_Chance(60);
+            skill.Set_Cri_Chance(40);
 
             _skills.Add(skill);
             #endregion
@@ -110,7 +110,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                             }
                         }
 
-                        _sprite.Transition(goal, _sprite.Position, 35, 5);
+                        _sprite.Transition(goal, _sprite.Position, 35, 6);
 
                         //Set Hit
                         if (_sprite.Get_Cur_Frame() == 15) _sprite.Set_isHealth_Calculated(true);
@@ -175,46 +175,56 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                 case "Ant-Man-Super-Pint-Size_Surprise":
                     #region Skill Motion
                     {
-                        #region Skill Motion
+                        if (BattleState.IsLeft_Side(this)) goal = new Vector2(_sprite.Position.X - 220, _sprite.Position.Y - 200);
+                        else goal = new Vector2(_sprite.Position.X + 220, _sprite.Position.Y - 200);
+
+                        _sprite.Transition(_sprite.Position, goal, 4, 7);
+
+                        if (_sprite.Get_Cur_Frame() == 20)
                         {
-                            //for melee skill
-                            if (_sprite.Get_Cur_Frame() == 10)
-                            {
-                                if (BattleState.IsLeft_Side(this)) goal = new Vector2(_sprite.Position.X - 300, _sprite.Position.Y - 300);
-                                else goal = new Vector2(_sprite.Position.X + 300, _sprite.Position.Y - 300);
-                            }
-
-                            _sprite.Transition(_sprite.Position, goal, 10, 10);
-
-                            if (_sprite.Get_Cur_Frame() == 23) _sprite._cur_position = Set_Melee_Goal(_sprite.Get_Targets()[0]);
-
-                            //When Hit
-                            if (_sprite.Get_Cur_Frame() == 36)
-                            {
-                                foreach (var target in _sprite.Get_Targets())
-                                {
-                                    target.Re_Main();
-                                }
-                            }
-
-                            if (_sprite.Get_Cur_Frame() == 47)
-                            {
-                                goal = new Vector2(_sprite.Position.X, _sprite.Position.Y - 500);
-                                _sprite._cur_position = goal;
-                            }
-
-                            _sprite.Transition(goal, _sprite.Position, 47, 8);
-
-                            //Set Hit
-                            if (_sprite.Get_Cur_Frame() == 30) _sprite.Set_isHealth_Calculated(true);
-                            else _sprite.Set_isHealth_Calculated(false);
-
-                            //Use Stamina
-                            if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
-                            else _sprite.Set_isStamina_Calculated(false);
-                            break;
+                            if (BattleState.IsLeft_Side(this)) _sprite._cur_position = new Vector2(_sprite.Get_Targets()[0].Get_Rectangle().X - 250, _sprite.Get_Targets()[0].Position.Y - 320);
+                            else _sprite._cur_position = new Vector2(_sprite.Get_Targets()[0].Get_Rectangle().X + _sprite.Get_Targets()[0].Get_Rectangle().Width, _sprite.Get_Targets()[0].Position.Y - 320);
                         }
-                        #endregion
+
+                        if (_sprite.Get_Cur_Frame() >= 24)
+                        {
+                            if (BattleState.IsLeft_Side(this)) goal = new Vector2(_sprite.Get_Targets()[0].Get_Rectangle().X - 100, 480);
+                            else goal = new Vector2(_sprite.Get_Targets()[0].Get_Rectangle().X + _sprite.Get_Targets()[0].Get_Rectangle().Width - 150, 480);
+                        }
+
+                        _sprite.Transition(_sprite._cur_position, goal, 24, 3);
+
+                        if (_sprite.Get_Cur_Frame() >= 38)
+                        {
+                            if (BattleState.IsLeft_Side(this)) goal = new Vector2(_sprite.Get_Targets()[0].Get_Rectangle().X + 100, -200);
+                            else goal = new Vector2(_sprite.Get_Targets()[0].Get_Rectangle().X + _sprite.Get_Targets()[0].Get_Rectangle().Width - 350, -200);
+                        }
+
+                        _sprite.Transition(_sprite._cur_position, goal, 38, 5);
+
+                        if (_sprite.Get_Cur_Frame() == 53)
+                        {
+                            _sprite._cur_position = new Vector2(_sprite.Position.X, -200);
+                        }
+
+                        _sprite.Transition(new Vector2(_sprite.Position.X, -200), _sprite.Position, 53, 4);
+
+                        //When Hit
+                        if (_sprite.Get_Cur_Frame() == 45)
+                        {
+                            foreach (var target in _sprite.Get_Targets())
+                            {
+                                target.Re_Main();
+                            }
+                        }
+
+                        //Set Hit
+                        if (_sprite.Get_Cur_Frame() == 27) _sprite.Set_isHealth_Calculated(true);
+                        else _sprite.Set_isHealth_Calculated(false);
+
+                        //Use Stamina
+                        if (_sprite.Get_Cur_Frame() == 1) _sprite.Set_isStamina_Calculated(true);
+                        else _sprite.Set_isStamina_Calculated(false);
                         break;
                     }
                     #endregion
@@ -244,7 +254,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
         protected override Vector2 Set_Melee_Goal(Sprite target)
         {
             if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X - 200, target.Position.Y + 0.01f);
-            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width - 120, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width - 80, target.Position.Y + 0.01f);
         }
 
         protected override Vector2 Set_Range_Goal(Sprite target)
