@@ -127,8 +127,8 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                     {
 
                         //for melee skill
-                        if(BattleState.IsLeft_Side(this)) goal = new Vector2(250, 420);
-                        else goal = new Vector2(0, 420);
+                        if(BattleState.IsLeft_Side(this)) goal = new Vector2(250, 431);
+                        else goal = new Vector2(0, 431);
 
                         _sprite.Transition(_sprite.Position, goal, 4, 2);
                         //When Hit
@@ -157,8 +157,8 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
                     {
 
                         //for melee skill
-                        if (BattleState.IsLeft_Side(this)) goal = new Vector2(250, 420);
-                        else goal = new Vector2(0, 420);
+                        if (BattleState.IsLeft_Side(this)) goal = new Vector2(250, 431);
+                        else goal = new Vector2(0, 431);
 
                         _sprite.Transition(_sprite.Position, goal, 1, 1);
                         //When Hit
@@ -235,8 +235,8 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
 
         protected override Vector2 Set_Melee_Goal(Sprite target)
         {
-            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X -80, target.Position.Y + 0.01f);
-            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width -400, target.Position.Y + 0.01f);
+            if (BattleState.IsLeft_Side(this)) return new Vector2(target.Get_Rectangle().X -180, target.Position.Y + 0.01f);
+            else return new Vector2(target.Get_Rectangle().X + target.Get_Rectangle().Width -300, target.Position.Y + 0.01f);
         }
 
         protected override Vector2 Set_Range_Goal(Sprite target)
