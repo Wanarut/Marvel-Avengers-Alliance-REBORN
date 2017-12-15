@@ -56,12 +56,16 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             {
                 case Gadget.Agent_Recharge:
                     {
-                        MediaPlayer.Stop();
-                        List<Character> enemies = new List<Character>();
-                        enemies.Add(new Ant_Man(_content));
-                        enemies.Add(new Captain_America(_content));
-                        enemies.Add(new Cable(_content));
-                        _game.Change_State(new MapState(_game, _graphicsDevice, _content));
+                        if(textbox.Text.Length > 3)
+                        {
+                            MediaPlayer.Stop();
+                            List<Character> enemies = new List<Character>();
+                            enemies.Add(new Ant_Man(_content));
+                            enemies.Add(new Captain_America(_content));
+                            enemies.Add(new Cable(_content));
+                            _game.Change_State(new LoadingState(_game, _graphicsDevice, _content,
+                                new MapState(_game, _graphicsDevice, _content)));
+                        }
                         break;
                     }
                 case Gadget.Arc_Reactor_Charge:

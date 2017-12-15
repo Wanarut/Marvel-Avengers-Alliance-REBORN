@@ -61,10 +61,10 @@ namespace Marvel_Avengers_Alliance_REBORN
         protected override void LoadContent()
         {
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume -= 1.0f;
+            MediaPlayer.Volume += 3.0f;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            _cur_state = new LogInState(this, graphics.GraphicsDevice, Content);
+            _cur_state = new StartState(this, graphics.GraphicsDevice, Content);
             //_cur_state.LoadContent();
             // TODO: use this.Content to load your game content here
         }

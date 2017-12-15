@@ -261,7 +261,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                     }
                 case MapButton.IC_007:
                     {
-                        _game.Change_State(new SelectState(_game, _graphicsDevice, _content, enemies));
+                        _game.Change_State(new LoadingState(_game, _graphicsDevice, _content, 
+                            new SelectState(_game, _graphicsDevice, _content, enemies)));
                         LogInState.numstage++;
                         break;
                     }

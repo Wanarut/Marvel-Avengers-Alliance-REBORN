@@ -552,7 +552,9 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             {
                 if (avatar.Get_Sprite().Get_IsDead())
                 {
-                    /*if (IsLeft_Side(avatar))*/ cur_turn--;
+                    heroes[cur_turn].Set_Sprite_Focus(true);
+                    /*if (IsLeft_Side(avatar))*/
+                    cur_turn--;
                     if (cur_turn < 0) cur_turn = 0;
                     heroes.Remove(avatar);
                     break;
@@ -566,7 +568,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             if (Game_Over())
             {
                 if (!IsLeft_Side(heroes[0])) LogInState.numstage--;
-                _game.Change_State(new MapState(_game, _graphicsDevice, _content));
+                _game.Change_State(new LoadingState(_game, _graphicsDevice, _content, 
+                    new MapState(_game, _graphicsDevice, _content)));
             }
             else
             {

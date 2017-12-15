@@ -19,5 +19,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA
         public const string BG_0000 = "Map002";
         public const string SG_001 = "Select_Background_001";
         public const string SG_002 = "StetusBar";
+        public const string LoadingMap = "LoadingMap";
+        public const string BackStart = "BackStart";
     }
 }

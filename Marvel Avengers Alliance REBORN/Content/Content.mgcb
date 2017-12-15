@@ -2945,6 +2945,42 @@
 /processorParam:TextureFormat=Color
 /build:Icon/X-23-Status.png
 
+#begin Map_Background/BackStart.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map_Background/BackStart.png
+
+#begin Map_Background/LoadingIcon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map_Background/LoadingIcon.png
+
+#begin Map_Background/LoadingMap.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map_Background/LoadingMap.png
+
 #begin Map_Background/Map001.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2957,7 +2993,7 @@
 /processorParam:TextureFormat=Color
 /build:Map_Background/Map001.png
 
-#begin Map_Background/Map002.gif
+#begin Map_Background/Map002.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -2967,7 +3003,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Map_Background/Map002.gif
+/build:Map_Background/Map002.png
 
 #begin Map_Background/map1.jpg
 /importer:TextureImporter
@@ -3160,6 +3196,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:MapButton/Nextt.png
+
+#begin MapButton/StartButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:MapButton/StartButton.png
 
 #begin MapButton/War_Task_Icon.png
 /importer:TextureImporter

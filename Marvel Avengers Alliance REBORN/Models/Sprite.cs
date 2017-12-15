@@ -66,6 +66,18 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         protected Rectangle Rectangle;
 
         public Vector2 Position { get; set; }
+
+        public Sprite(ContentManager content, string assign)
+        {
+            _timePerFrame = (float)1 / _frame_per_sec;
+
+            ChangeTexture(content.Load<Texture2D>(assign), 15, 6);
+
+            _main_texture = _cur_texture;
+
+            _frame_width = _cur_texture.Width / 15;
+            _frame_height = _cur_texture.Height / 6;
+        }
         
         public Sprite(ContentManager content, string hero_name, string uniform_name)
         {
@@ -338,6 +350,9 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
                     hasTarget = false;
                     _targets = new List<Sprite>();
                     isFocus = false;
+                }else if(_cur_frame == (_frame_per_sec * _time_cast) && (_cur_texture.Width / 15) == 200)
+                {
+                    isDead = true;
                 }
                 else isAttackFinish = false;
                 // Keep the Frame between 0 and the total frames, minus one.

@@ -389,7 +389,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         
         private void Back_was_Clicked(object sender, EventArgs e)
         {
-            _game.Change_State(new MapState(_game, _graphicsDevice, _content));
+            _game.Change_State(new LoadingState(_game, _graphicsDevice, _content, 
+                new MapState(_game, _graphicsDevice, _content)));
         }
 
         private void Start_was_Clicked(object sender, EventArgs e)
@@ -518,7 +519,8 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                 heroes[2]._hp_bar.Position = new Vector2(10, 240);
             }
 
-            _game.Change_State(new BattleState(_game, _graphicsDevice, _content, heroes));
+            _game.Change_State(new LoadingState(_game, _graphicsDevice, _content, 
+                new BattleState(_game, _graphicsDevice, _content, heroes)));
             //Do something
         }
 

@@ -212,7 +212,8 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA.Heroes
 
         public override void Set_Sprite_Position(Vector2 vector)
         {
-            _sprite.Position = vector;
+            if (vector.X < MAAGame.SCREEN_WIDTH / 12.0f) _sprite.Position = new Vector2(vector.X - 50, vector.Y);
+            else _sprite.Position = new Vector2(vector.X + 50, vector.Y);
             if (vector.X < MAAGame.SCREEN_WIDTH / 6.0f)
             {
                 _sprite.Set_Rectangle(new Rectangle((int)_sprite.Position.X + (int)(_sprite.Get_Sprite_Width() / 3.4f),

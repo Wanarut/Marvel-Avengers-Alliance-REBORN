@@ -77,9 +77,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\BattleState.cs" />
+    <Compile Include="States\LoadingState.cs" />
     <Compile Include="States\LogInState.cs" />
     <Compile Include="States\MapState.cs" />
     <Compile Include="States\SelectState.cs" />
+    <Compile Include="States\StartStage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
