@@ -23,6 +23,7 @@ namespace Marvel_Avengers_Alliance_REBORN.DATA
         public const string IC_006 = "Mon-X-23";
         public const string IC_007 = "Nextt";
         public const string StartButton = "StartButton";
+        public const string ExitButton = "ExitButton";
 
     }
 }

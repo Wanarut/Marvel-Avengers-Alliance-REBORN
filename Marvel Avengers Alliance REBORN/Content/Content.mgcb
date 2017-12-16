@@ -2509,6 +2509,18 @@
 /processorParam:TextureFormat=Color
 /build:Component/Empty_Status_Bar.png
 
+#begin Component/ExitButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Component/ExitButton.png
+
 #begin Component/HEALTH   .png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2568,6 +2580,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Component/STAMINA.png
+
+#begin Component/StartButton.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Component/StartButton.png
 
 #begin Component/text_cursor.png
 /importer:TextureImporter
@@ -3197,18 +3221,6 @@
 /processorParam:TextureFormat=Color
 /build:MapButton/Nextt.png
 
-#begin MapButton/StartButton.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:MapButton/StartButton.png
-
 #begin MapButton/War_Task_Icon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -3245,27 +3257,33 @@
 /processorParam:TextureFormat=Color
 /build:Select_Background/StetusBar.png
 
+#begin Songs/Breaking And Entering.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/Breaking And Entering.mp3
+
 #begin Songs/Imagine Dragons-Warriors.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Songs/Imagine Dragons-Warriors.mp3
 
-#begin Songs/SelectSong.mp3
+#begin Songs/Soundgarden - Live to Rise.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/SelectSong.mp3
+/build:Songs/Soundgarden - Live to Rise.mp3
+
+#begin Songs/The Avengers Theme on Guitar.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/The Avengers Theme on Guitar.mp3
 
 #begin Songs/Thor Ragnarok Soundtrack Song.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Songs/Thor Ragnarok Soundtrack Song.mp3
-
-#begin Songs/Vader's Redemption-Major Key.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Songs/Vader's Redemption-Major Key.mp3
 

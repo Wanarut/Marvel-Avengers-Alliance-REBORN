@@ -67,7 +67,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             HerosStatus = new List<SelectIcon>();
             Button = new List<SelectIcon>();
             #region Song
-            song = _content.Load<Song>("Songs/" + Songs.SelectSong);    //Set Song
+            song = _content.Load<Song>("Songs/" + Songs.SelectState_Song);    //Set Song
             MediaPlayer.Play(song);
             #endregion
 
@@ -389,6 +389,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         
         private void Back_was_Clicked(object sender, EventArgs e)
         {
+            LogInState.numstage--;
             _game.Change_State(new LoadingState(_game, _graphicsDevice, _content, 
                 new MapState(_game, _graphicsDevice, _content)));
         }

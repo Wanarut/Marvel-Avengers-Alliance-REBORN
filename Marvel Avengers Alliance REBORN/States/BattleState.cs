@@ -97,7 +97,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             cur_turn = 0;
 
-            song = _content.Load<Song>("Songs/" + Songs.Thor_Ragnarok_Soundtrack_Song);    //Set Song
+            song = _content.Load<Song>("Songs/" + Songs.BattleState_Song);    //Set Song
             MediaPlayer.Play(song);
             MediaPlayer.Volume -= 0.4f;
 
@@ -374,6 +374,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
         private void BtnAttack_was_Clicked(object sender, EventArgs e)
         {
+            if (!BattleState.IsLeft_Side(heroes[cur_turn])) return;
             if (heroes[cur_turn].Get_Sprite_HasTarget()) return;
             heroes[cur_turn].Set_Cur_Skill_Btn(((SkillButton)sender).Get_me());
             if (heroes[cur_turn].Get_Cur_Skill_Btn() == null) return;
@@ -385,7 +386,9 @@ namespace Marvel_Avengers_Alliance_REBORN.States
         private void Char_was_Clicked(object sender, EventArgs e)
         {
             heroes[cur_turn].Set_Sprite_HasTarget(false);
-            
+
+            if (!BattleState.IsLeft_Side(heroes[cur_turn])) return;
+
             if (!heroes[cur_turn].isPickSkill) return;
 
             if (heroes[cur_turn].Get_Cur_Skill_Btn().Get_me() == null) return;

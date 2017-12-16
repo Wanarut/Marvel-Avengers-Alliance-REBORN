@@ -40,7 +40,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             _background.LoadContent(_content, "Combat_Background/" + BG.BG_024);  //Set BackGround
 
             textbox = new Textbox(_content, "textbox1");
-            song = _content.Load<Song>("Songs/" + Songs.Imagine_Dragons_Warriors);    //Set Song
+            song = _content.Load<Song>("Songs/" + Songs.LogInState_Song);    //Set Song
             MediaPlayer.Play(song);
 
             var btn = new MenuButton(_content, Gadget.Agent_Recharge);
@@ -56,7 +56,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             {
                 case Gadget.Agent_Recharge:
                     {
-                        if(textbox.Text.Length > 3)
+                        if(textbox.Text.Length > 0)
                         {
                             MediaPlayer.Stop();
                             List<Character> enemies = new List<Character>();

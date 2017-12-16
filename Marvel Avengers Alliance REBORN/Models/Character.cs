@@ -162,13 +162,13 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
         public void Set_Health(int cur_health)
         {
             _cur_health = cur_health;
-            _hp_bar.Set_Value(_cur_health);
+            if(_hp_bar != null) _hp_bar.Set_Value(_cur_health);
         }
 
         public void Set_Stamina(int cur_stamina)
         {
             _cur_stamina = cur_stamina;
-            _sp_bar.Set_Value(_cur_stamina);
+            if(_sp_bar != null) _sp_bar.Set_Value(_cur_stamina);
         }
 
         public void Set_Attack(int attack)

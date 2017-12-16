@@ -53,6 +53,7 @@ namespace Marvel_Avengers_Alliance_REBORN.Models
 
             spriteBatch.Draw(_texture, Rectangle, color);
         }
+
         public void Set_IsFocusIcon(bool logic)
         {
             isFocus = logic;
