@@ -30,6 +30,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             song = _content.Load<Song>("Songs/" + Songs.StartState_Song);    //Set Song
             MediaPlayer.Play(song);
+            MediaPlayer.Volume -= 0.4f;
 
             StartButton = new MenuButton(_content, MapButton.StartButton);
             StartButton.Position = new Vector2((Start_background.Get_Width()/2) - StartButton.Get_Width() / 2, 320);

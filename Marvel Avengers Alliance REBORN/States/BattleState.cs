@@ -99,7 +99,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
 
             song = _content.Load<Song>("Songs/" + Songs.BattleState_Song);    //Set Song
             MediaPlayer.Play(song);
-            MediaPlayer.Volume -= 0.4f;
+            MediaPlayer.Volume -= 0.2f;
 
             combat_background.LoadContent(_content, "Combat_Background/" + BG.BG_011);  //Set BackGround
 
