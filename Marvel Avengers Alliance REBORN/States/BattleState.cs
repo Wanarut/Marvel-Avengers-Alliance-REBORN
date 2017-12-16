@@ -175,7 +175,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
             {
                 //create bot
 
-                if (!heroes[cur_turn].Get_Skills_Buttons()[0].Get_EnoughStamina() && !heroes[cur_turn].Get_Skills_Buttons()[1].Get_EnoughStamina() && 
+                if (!heroes[cur_turn].Get_Sprite_HasTarget() && !heroes[cur_turn].Get_Skills_Buttons()[0].Get_EnoughStamina() && !heroes[cur_turn].Get_Skills_Buttons()[1].Get_EnoughStamina() && 
                     !heroes[cur_turn].Get_Skills_Buttons()[2].Get_EnoughStamina() && !heroes[cur_turn].Get_Skills_Buttons()[3].Get_EnoughStamina())
                 {
                     heroes[cur_turn].Recharge();

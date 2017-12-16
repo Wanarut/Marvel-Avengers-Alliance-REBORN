@@ -196,7 +196,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                     }
                 case MapButton.MB_004:
                     {
-                        if (LogInState.numstage != 4)
+                        if (LogInState.numstage >= 4)
                         {
                             enemieslist.Clear();
                             enemies.Clear();
@@ -224,7 +224,7 @@ namespace Marvel_Avengers_Alliance_REBORN.States
                     }
                 case MapButton.MB_005:
                     {
-                        if (LogInState.numstage != 5)
+                        if (LogInState.numstage >= 5)
                         {
                            enemieslist.Clear();
                             enemies.Clear();

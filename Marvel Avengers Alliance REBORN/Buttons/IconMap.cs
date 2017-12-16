@@ -67,14 +67,14 @@ namespace Marvel_Avengers_Alliance_REBORN.Buttons
         public override void Draw(SpriteBatch spriteBatch)
         {
             var color = Color.White;
-
-            if (Position.Y <= 500) color = Color.DarkSlateGray;
-
-            if (isFocus)
-                color = Color.White;
+            
+            /*if (isFocus)
+                color = Color.White;*/
 
             if (isBoss)
                 color = Color.Crimson;
+            
+            if (Position.Y <= 500 && !isFocus) color = Color.DarkSlateGray;
 
             spriteBatch.Draw(_texture, Rectangle, color);
         }
